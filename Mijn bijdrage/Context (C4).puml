@@ -1,6 +1,8 @@
 @startuml C4_Elements
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
+SHOW_PERSON_OUTLINE()
+
 Person(personAlias, "Reiziger", "Een gebruiker die TripTop wilt gebruiken, voor het plannen van een reis.")
 Person(reisagent,"Reis Agent", "Een gebruiker die de reiziger ondersteunt bij het plannen van een reis.")
 System(systemAlias, "TripTop", "Reis applicatie")
@@ -15,7 +17,7 @@ System_Ext(7, "Airbnb", "Accommodaties")
 System_Ext(8, "Uber", "Taxi service")
 
 Rel(personAlias, systemAlias, "Plant een reis")
-Rel(reisagent, systemAlias, "Beheert de applicatie")
+Rel(reisagent, systemAlias, "Biedt hulp bij het plannen van een reis")
 
 
 
