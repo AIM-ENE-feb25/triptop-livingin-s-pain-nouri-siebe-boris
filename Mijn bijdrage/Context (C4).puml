@@ -28,6 +28,6 @@ Rel(systemAlias, 4, "Krijgt trein schema")
 Rel(systemAlias, 5, "Krijgt Accommodatie informatie")
 Rel(systemAlias, 6, "Krijgt Vlucht informatie")
 Rel(systemAlias, 7, "Krijgt Accommodatie informatie")
-Rel(systemAlias, 8, "Krijgt UBer rit informatie")
+Rel(systemAlias, 8, "Krijgt Uber rit informatie")
 
 @enduml
