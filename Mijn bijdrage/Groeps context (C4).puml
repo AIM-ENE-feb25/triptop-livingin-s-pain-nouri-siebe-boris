@@ -13,7 +13,7 @@ System_Ext(accommodatieaanbieder, "Accommodatie aanbieder (Booking.com, Airbnb..
 System_Ext(activiteitenaanbieder, "Activiteiten aanbieder (Tripadvisor....)", "Bieden activiteiten informatie en boeken activiteiten")
 System_Ext(identityProvider, "Identity provider (Google, Facebook....)", "Zorgt voor de identiteit van de gebruiker")
 System_Ext(etengelegenhedenaanbieder, "Eten en drinken (Thuisbezorgd, Uber Eats....)", "Bieden eten en drinken informatie en bestellen eten en drinken")
-System_Ext(maps, "Kaart applicatie (Google Maps)", "Toont de kaart")
+System_Ext(maps, "Kaart Provider (Google Maps)", "Toont de kaart")
 
 Rel(personAlias, systemAlias, "Wilt de applicatie gebruiken bij het plannen en boeken van een reis")
 Rel(reisagent, systemAlias, "Biedt hulp bij het plannen van een reis")
