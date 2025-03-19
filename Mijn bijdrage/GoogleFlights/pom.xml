@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.example</groupId>
-    <artifactId>GoogleFlights</artifactId>
+    <artifactId>API</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>GoogleFlights</name>
     <description>GoogleFlights</description>
@@ -47,6 +47,11 @@
             <version>3.13.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
 
     </dependencies>
 
