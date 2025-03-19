@@ -1,0 +1,48 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Title Container diagram - Triptop
+SHOW_PERSON_OUTLINE()
+
+Person(personAlias, "Reiziger", "Een gebruiker die TripTop wilt gebruiken, voor het plannen van een reis.")
+Person(reisagent,"Reis Agent", "Een gebruiker die de reiziger ondersteunt bij het plannen van een reis.")
+
+
+System_Boundary(boundary, "Triptop"){
+Container(webapp, "Web Applicatie","?",De applicatie die de reiziger helpt bij het plannen van een reis.")
+Container(backend, "Backend","?", "De backend van de applicatie die de data verwerkt.")
+Container(database, "Database", "?")
+}
+
+System_Ext(googleMaps, "Google Maps API", "Biedt navigatie en locatiegegevens")
+System_Ext(ns, "NS API", "Openbaar vervoer, vertrektijden, ritten")
+System_Ext(openweather, "Open Weather API", "Krijg weer informatie van een specifieke locatie")
+System_Ext(overnachtingaApi, "Overnachting API (Booking.com, Airbnb)", "Voor het vinden van een overnachtingen")
+System_Ext(identityProvider, "Identity Provider API (WireMock)", "Het simuleren van een identity provider")
+System_Ext(flightApi, Vluchten API (Google Flights, Skyscanner)", "Voor het vinden van vluchten")
+System_Ext(betalingapi, "Betaling API (?)", "Voor het verwerken van betalingen")
+
+
+Rel(personAlias, webapp, "Gebruikt applicatie om reizen en activiteiten te plannen en te boeken","HTTPS")
+Rel(reisagent, webapp, "Gebruikt applicatie om reiziger te ondersteunen bij het boeken en plannen","HTTPS")
+
+Rel(webapp, backend, "Verstuurt API requests naar","HTTPS")
+Rel(backend, database, "?")
+
+Rel(webapp, googleMaps, "Vraagt navigatie en locatiegegevens op","HTTPS")
+
+Rel(webapp, ns, "Vraagt vertrektijden en ritten op","HTTPS")
+Rel(backend, ns, "Boekt trein ritten","HTTPS")
+
+Rel(webapp, openweather, "Vraagt weer informatie op","HTTPS")
+
+Rel(webapp, overnachtingaApi, "krijgt informatie over de overnachtingen via","HTTPS")
+Rel(backend, overnachtingaApi, "boekt overnachtingen via","HTTPS")
+
+Rel(webapp, identityProvider, "Simuleert authenticatie","HTTPS")
+Rel(backend, identityProvider, "Simuleert autorisatie","HTTPS")
+
+Rel(webapp, flightApi, "Krijgt informatie via","HTTPS")
+Rel(backend, flightApi, "boekt vluchten via","HTTPS")
+
+Rel(backend, betalingapi, "Verwerkt betalingen via","HTTPS")
+@enduml
