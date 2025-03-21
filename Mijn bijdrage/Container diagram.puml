@@ -10,7 +10,7 @@ Person(reisagent,"Reis Agent", "Een gebruiker die de reiziger ondersteunt bij he
 System_Boundary(boundary, "Triptop"){
 Container(webapp, "Web Applicatie","?",De applicatie die de reiziger helpt bij het plannen van een reis.")
 Container(backend, "Backend","?", "De backend van de applicatie die de data verwerkt.")
-Container(database, "Database", "?")
+Container(database, "Database", "?", "Het opslaan van de gebruikersdata en de geboekte reizen (Bouwstenen)")
 }
 
 System_Ext(googleMaps, "Google Maps API", "Biedt navigatie en locatiegegevens")
@@ -29,11 +29,11 @@ Rel(webapp, backend, "Verstuurt API requests naar","HTTPS")
 Rel(backend, database, "?")
 
 Rel(webapp, googleMaps, "Vraagt navigatie en locatiegegevens op","HTTPS")
+Rel(webapp, openweather, "Vraagt weer informatie op","HTTPS")
+Rel(backend, betalingapi, "Verwerkt betalingen via","HTTPS")
 
 Rel(webapp, ns, "Vraagt vertrektijden en ritten op","HTTPS")
 Rel(backend, ns, "Boekt trein ritten","HTTPS")
-
-Rel(webapp, openweather, "Vraagt weer informatie op","HTTPS")
 
 Rel(webapp, overnachtingaApi, "krijgt informatie over de overnachtingen via","HTTPS")
 Rel(backend, overnachtingaApi, "boekt overnachtingen via","HTTPS")
@@ -44,5 +44,5 @@ Rel(backend, identityProvider, "Simuleert autorisatie","HTTPS")
 Rel(webapp, flightApi, "Krijgt informatie via","HTTPS")
 Rel(backend, flightApi, "boekt vluchten via","HTTPS")
 
-Rel(backend, betalingapi, "Verwerkt betalingen via","HTTPS")
+
 @enduml
