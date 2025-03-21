@@ -1,0 +1,33 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+SHOW_PERSON_OUTLINE()
+
+Person(personAlias, "Reiziger", "Een gebruiker die TripTop wilt gebruiken, voor het plannen van een reis.")
+Person(reisagent,"Reis Agent", "Een gebruiker die de reiziger ondersteunt bij het plannen van een reis.")
+System(systemAlias, "TripTop", "Reis applicatie")
+System_Ext(systemExtAlias, "Google Maps", "Kaart applicatie")
+
+System_Ext(2, "Tripadvisor", "Reis informatie, Activiteiten")
+System_Ext(3, "SIXT", "Auto verhuur")
+System_Ext(4, "NS", "Openbaar vervoer")
+System_Ext(5, "Booking.com", "Hotel boekingen")
+System_Ext(6, "KLM", "Vliegtickets")
+System_Ext(7, "Airbnb", "Accommodaties")
+System_Ext(8, "Uber", "Taxi service")
+
+Rel(personAlias, systemAlias, "Plant een reis")
+Rel(reisagent, systemAlias, "Biedt hulp bij het plannen van een reis")
+
+
+
+Rel(systemAlias, systemExtAlias, "Krijgt kaart informatie")
+Rel(systemAlias, 2, "Krijgt activiteiten informatie")
+Rel(systemAlias, 3, "Krijgt Auto verhuur informatie")
+Rel(systemAlias, 4, "Krijgt trein schema")
+Rel(systemAlias, 5, "Krijgt Accommodatie informatie")
+Rel(systemAlias, 6, "Krijgt Vlucht informatie")
+Rel(systemAlias, 7, "Krijgt Accommodatie informatie")
+Rel(systemAlias, 8, "Krijgt Uber rit informatie")
+
+@enduml

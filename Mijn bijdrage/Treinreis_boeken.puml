@@ -1,0 +1,63 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml
+
+title Trein Reis Boeken - TripTop
+autonumber
+
+actor "Reiziger" as reiziger
+
+System_Boundary(tripTopSystem, "TripTop")
+    Container(webApp, "Web Applicatie", "? (React)", "Helpt reizigers bij het plannen en boeken van reizen")
+    Container(backend, "Backend", "Springboot Java", "Verwerkt data en beheert bedrijfslogica")
+    Container(database, "Database", "SQL of NOSQL?", "Slaat gebruikersgegevens en geboekte reizen op")
+Boundary_End()
+
+System_Ext(wiremock, "Identity Provider API (WireMock)", "Simuleert identity provider")
+System_Ext(betalingApi, "Betaling API (?)", "Voor het verwerken van betalingen")
+System_Ext(nsApi, "NS API", "Informatie over openbaar vervoer en het boeken van ritten")
+
+
+reiziger -> webApp: Vraagt reis op
+webApp -> nsApi: Vraagt beschikbare treinreizen op (HTTPS/REST)
+nsApi -> webApp: Stuurt treinopties (HTTPS)
+
+reiziger -> webApp: Selecteert gewenste treinreis
+
+reiziger -> webApp: Voert betaalgegevens in
+reiziger -> webApp: Bevestigt selectie
+
+webApp -> backend: Stuurt boekingsverzoek (HTTPS)
+
+alt Gebruiker niet ingelogd
+    backend -> wiremock: Verifieert gebruiker (HTTPS)
+    wiremock -> backend: Gebruiker niet geautoriseerd
+    backend -> webApp: foutmelding(HTTPS)
+
+else Gebruiker ingelogd
+    backend -> wiremock: Verifieert gebruiker (HTTPS)
+    wiremock -> backend: Gebruiker geautoriseerd
+
+
+backend -> nsApi: Controleert beschikbaarheid (HTTPS/REST)
+
+alt Reis beschikbaar
+    backend -> betalingApi: Verwerkt betaling (HTTPS/REST)
+
+    alt Betaling succesvol
+        backend -> nsApi: Boekt treinreis (HTTPS/REST)
+        backend -> database: Slaat reserveringsgegevens op
+        backend -> webApp: Stuurt boekingsbevestiging (HTTPS)
+        webApp -> reiziger: Toont ticket en reisdetails
+    else Betaling mislukt
+        betalingApi -> backend: Betaling geweigerd
+        backend -> webApp: Stuurt betalingsfout (HTTPS)
+        webApp -> reiziger: Toont foutmelding
+    end
+
+else Reis niet meer beschikbaar
+    nsApi -> backend: Meldt onbeschikbaarheid
+    backend -> webApp: Stuurt foutmelding (HTTPS)
+    end
+end
+
+@enduml
