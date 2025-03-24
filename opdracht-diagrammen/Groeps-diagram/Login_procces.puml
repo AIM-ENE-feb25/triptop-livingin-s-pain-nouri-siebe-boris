@@ -1,0 +1,38 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml
+title Login Process - TripTop
+autonumber
+
+actor reiziger
+
+System_Boundary(tripTopSystem, "TripTop")
+    Container(webApp, "Web Applicatie", "? (React)", "Helpt reizigers bij het plannen en boeken van reizen")
+Boundary_End()
+
+
+System_Ext(identityApi, "Identity Provider API (WireMock)", "Simuleert identity provider")
+
+reiziger -> webApp: Opent login pagina
+
+reiziger -> webApp: Voert gebruikersnaam en wachtwoord in
+webApp -> webApp: Valideert invoer
+
+webApp -> identityApi: Authenticatie verzoek  (HTTPS)
+
+
+alt Succesvolle authenticatie
+    identityApi -> webApp: Authenticatie succesvol krijgt terug voor en achternaam + token
+    webApp -> reiziger: Toont pagina
+else Authenticatie mislukt
+    identityApi -> webApp: Authenticatie mislukt
+    webApp -> reiziger: Toont inlogfout
+end
+
+
+
+
+
+
+
+@enduml
