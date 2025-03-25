@@ -1,8 +1,8 @@
-# Architectural Decision Record (ADR)
+# Indeling Webapplicaties (ADR-01)
 
 ## Status
+_Accepted_
 
-_Pending_
 ## Context
 
 Bij het ontwikkelen van de Triptop webapplicatie willen we twee verschillende gebruikersrollen ondersteunen: de reiziger en de reisagent. De reiziger heeft toegang tot de belangrijkste functionaliteiten van de webapplicatie, zoals het zoeken naar reizen, boeken van vluchten, hotels, en het beheren van persoonlijke gegevens.

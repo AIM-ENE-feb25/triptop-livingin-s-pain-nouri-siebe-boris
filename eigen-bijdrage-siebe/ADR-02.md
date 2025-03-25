@@ -1,4 +1,4 @@
-# 1. Betalingen ADR
+#  Communicatie Betaling Provider (ADR-02)
 
 **Datum:** 21-03-2025  
 

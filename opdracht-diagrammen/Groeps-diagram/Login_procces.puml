@@ -16,9 +16,8 @@ System_Ext(identityApi, "Identity Provider API (WireMock)", "Simuleert identity 
 reiziger -> webApp: Opent login pagina
 
 reiziger -> webApp: Voert gebruikersnaam en wachtwoord in
-webApp -> webApp: Valideert invoer
 
-webApp -> identityApi: Authenticatie verzoek  (HTTPS)
+webApp -> identityApi: Authenticatie verzoek (HTTPS)
 
 
 alt Succesvolle authenticatie

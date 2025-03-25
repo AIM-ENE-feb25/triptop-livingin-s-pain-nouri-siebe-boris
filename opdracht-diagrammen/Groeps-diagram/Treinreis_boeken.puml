@@ -9,7 +9,7 @@ actor "Reiziger" as reiziger
 System_Boundary(tripTopSystem, "TripTop")
     Container(webApp, "Web Applicatie", "? (React)", "Helpt reizigers bij het plannen en boeken van reizen")
     Container(backend, "Backend", "Springboot Java", "Verwerkt data en beheert bedrijfslogica")
-    Container(database, "Database", "SQL of NOSQL?", "Slaat gebruikersgegevens en geboekte reizen op")
+    ContainerDb(database, "Database", "SQL of NOSQL?", "Slaat gebruikersgegevens en geboekte reizen op")
 Boundary_End()
 
 System_Ext(wiremock, "Identity Provider API (WireMock)", "Simuleert identity provider")
