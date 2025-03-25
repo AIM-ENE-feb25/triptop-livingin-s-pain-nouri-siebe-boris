@@ -43,7 +43,6 @@ public class GoodExample {
 ### Voordelen:
 - Verminderde afhankelijkheden tussen klassen
 - Verhoogde onderhoudbaarheid van code
-- Betere encapsulatie
 - Eenvoudiger testen van individuele componenten
 
 ### Mogelijke Nadelen:
@@ -54,6 +53,4 @@ public class GoodExample {
 ## Design Properties
 
 De Wet van Demeter is gebaseerd op:
-1. **Encapsulatie**: Verbergen van interne implementatiedetails
-2. **Losse Koppeling**: Minimaliseren van afhankelijkheden tussen objecten
-3. **Scheiding van Verantwoordelijkheden**: Elke klasse is verantwoordelijk voor zijn eigen gedrag
+1. **Information Hiding**
