@@ -1,7 +1,8 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-skinparam ranksep 80
+
+skinparam ranksep 50
 skinparam nodesep 100
 skinparam ArrowColor #666666
 skinparam linetype ortho
@@ -15,47 +16,97 @@ title Component Diagram - TripTop
 
 
 
+
 Person(reiziger, "Reiziger", "Een gebruiker die TripTop wil gebruiken voor het plannen van een reis")
 Person(reisagent, "Reis Agent", "Een gebruiker die reizigers ondersteunt bij het plannen van hun reis")
 
 
 Container_Boundary(cb, "Web Application") {
-
-Component(homePage, "Home Page")
-Component(loginPage, "Login Page")
-Component(bookingPage, "Booking page")
-Component(accountPage, "Account Page")
-Component(reisAgentPage, "Reis Agent Page")
-Component(betalingsPage, "Betalings Page")
-Component(router, "Router")
-
-
-
-
-
-Component(navbar, "Navbar")
-Component(footer, "Footer")
+together{
 Component(loginform, "Login Form")
+Component(loginPage, "Login Page")
+}
+
+
+together{
+Component(homePage, "Home Page")
 Component(homeMessage, "Home Message")
-Component(searchbar, "Search Bar")
+}
+
+together{
+Component(tripOverview, "Trip Overview")
+Component(bookingPage, "Booking page")
 Component(bouwsteenHolder, "Bouwsteen Holder")
 Component(bouwsteen, "Bouwsteen")
 Component(map, "Map")
 Component(bouwsteenDetail, "Bouwsteen Detail")
 Component(categoryLabel, "Category label")
 Component(resevationForm, "Reservation Form")
-Component(orderOverview, "Order Overview")
-Component(tripOverview, "Trip Overview")
-Component(gegevensForm, "Gegevens Form")
+}
+
+
+together{
+Component(accountPage, "Account Page")
 Component(accountMenu, "Account Menu")
 Component(accountLink, "Account Link")
 Component(bookedTrips, "Booked Trips")
+}
+
+together{
+Component(reisAgentPage, "Reis Agent Page")
 Component(reisAgentDashboard, "Reis Agent Dashboard")
 Component(pendingTrips, "Pending Trips")
-Component(app, "App")
+}
 
+together{
+Component(betalingsPage, "Betalings Page")
+Component(orderOverview, "Order Overview")
+Component(gegevensForm, "Gegevens Form")
 
 }
+
+
+together{
+Component(router, "Router")
+Component(app, "App")
+Component(navbar, "Navbar")
+Component(footer, "Footer")
+}
+
+
+
+Component(searchbar, "Search Bar")
+
+}
+
+together{
+System_Ext(googleMapsApi, "Google Maps API", "Biedt navigatie en locatiegegevens")
+System_Ext(weerApi, "Open Weather API", "Geeft weerinformatie voor specifieke locaties")
+  System_Ext(nsApi, "NS API", "Informatie over openbaar vervoer en het boeken van ritten")
+  System_Ext(overnachtingApi, "Overnachting API (Booking.com, Airbnb)", "Voor het vinden en boeken van accommodaties")
+  System_Ext(vluchtApi, "Vluchten API (Skyscanner, Google flights)", "Voor het vinden en boeken van vluchten")
+  System_Ext(identityApi, "Identity Provider API (WireMock)", "Simuleert identity provider")
+}
+
+
+'systeem ext relatie
+Rel(bookingPage, searchbar, "Uses")
+Rel(bouwsteenHolder, weerApi,"Get weather forcast from")
+Rel(bouwsteenHolder, nsApi,"Get Train info from")
+Rel(bouwsteenHolder, overnachtingApi,"Get accomodation info from")
+Rel(bouwsteenHolder, vluchtApi,"Get flight info from")
+Rel(loginform, identityApi,"Get identity info from")
+
+Rel(map, googleMapsApi, "Get Geo location info from")
+
+
+
+
+
+
+
+
+
 Rel(reiziger, app, "Uses")
 Rel(reisagent, app, "Uses")
 
@@ -100,10 +151,7 @@ Rel(loginPage, loginform, "Contains")
 Rel(bookingPage, resevationForm, "Contains")
 Rel(bookingPage, tripOverview, "Contains")
 
-together{
-Rel(betalingsPage, gegevensForm, "Contains")
-Rel(betalingsPage, orderOverview, "Contains")
-}
+
 
 
 
