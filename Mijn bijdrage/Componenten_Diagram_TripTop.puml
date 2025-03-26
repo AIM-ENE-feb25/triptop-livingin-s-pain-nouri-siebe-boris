@@ -2,7 +2,7 @@
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
 
-skinparam ranksep 50
+skinparam ranksep 80
 skinparam nodesep 100
 skinparam ArrowColor #666666
 skinparam linetype ortho
