@@ -16,33 +16,22 @@ Container(frontend, "Webapplicatie", "React.js", "Gebruikersinterface voor het p
 Container_Boundary(cb, "Backend") {
     Component(tripcontroller, "TripController", "Spring Boot Controller", "Ontvangt HTTP-verzoeken en verwerkt reisboekingen")
     Component(tripservice, "TripService", "Spring Boot Service", "Regelt de volledige afhandeling van boekingen en betalingen")
-
-    Component(flightadapter, "VluchtAdapter", "Spring Boot Adapter", "Boekt vluchten bij externe providers")
-    Component(trainadapter, "TreinAdapter", "Spring Boot Adapter", "Boekt treintickets via de NS API")
     Component(stayadapter, "OvernachtingAdapter", "Spring Boot Adapter", "Regelt accommodaties bij boekingsplatformen")
-    Component(paymentadapter, "BetalingAdapter", "Spring Boot Adapter", "Verwerkt betalingen via betaalproviders")
     Component(triprepository, "TripRepository", "Spring Boot Repository", "Slaat boekingsgegevens op in de database")
 }
 
-together {
-    System_Ext(ns, "NS API", "Ontvangt boekingsverzoeken voor treinen")
+
+
     System_Ext(stay, "Accommodatie API (Booking.com, Airbnb)", "Ontvangt reserveringen voor accommodaties")
-    System_Ext(flight, "Vlucht API (Google Flights, Skyscanner)", "Ontvangt vluchtboekingen")
-    System_Ext(payment, "Betaalprovider (Stripe, Adyen, Mollie)", "Verwerkt betalingen")
     ComponentDb(db, "Database", "Slaat reis- en betalingsgegevens op")
-}
+
 
 Rel(frontend, tripcontroller, "Stuurt boekingsaanvragen naar")
 Rel(tripcontroller, tripservice, "Handelt boekingen af via")
 
-Rel(tripservice, flightadapter, "Boekt vlucht bij")
-Rel(tripservice, trainadapter, "Boekt treinticket bij")
 Rel(tripservice, stayadapter, "Boekt accommodatie bij")
-Rel(tripservice, paymentadapter, "Verwerkt betaling via")
-Rel(trainadapter, ns, "Stuurt boekingsverzoek naar")
 Rel(stayadapter, stay, "Stuurt reservering naar")
-Rel(flightadapter, flight, "Stuurt boeking naar")
-Rel(paymentadapter, payment, "Stuurt betalingsopdracht naar")
+
 
 Rel(tripservice, triprepository, "Slaat boekingsgegevens op in")
 Rel(triprepository, db, "Beheert de opslag van boekingen en betalingen in")
