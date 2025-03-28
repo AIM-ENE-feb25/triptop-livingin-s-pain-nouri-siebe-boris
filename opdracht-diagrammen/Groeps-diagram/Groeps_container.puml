@@ -21,7 +21,7 @@ SHOW_PERSON_OUTLINE()
 Person(reiziger, "Reiziger", "Een gebruiker die TripTop wil gebruiken voor het plannen van een reis")
 Person(reisagent, "Reis Agent", "Een gebruiker die reizigers ondersteunt bij het plannen van hun reis")
 
-' Externe systemen in logische groepen
+' Externe systemen in groepen
 
 together{
 System_Ext(googleMapsApi, "Google Maps API", "Biedt navigatie en locatiegegevens")

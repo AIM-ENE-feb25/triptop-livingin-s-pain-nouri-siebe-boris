@@ -1,0 +1,49 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+' Opmaak voor netheid, rechte lijnen en betere tekstzichtbaarheid
+skinparam ranksep 80
+skinparam nodesep 100
+skinparam ArrowColor #666666
+skinparam linetype ortho
+
+' Tekst opmaak verbeteren
+skinparam ArrowFontSize 12
+skinparam ArrowFontColor black
+skinparam ArrowFontStyle bold
+skinparam ArrowFontName Arial
+
+
+
+
+Container_Boundary(cb, "Backend") {
+
+    Component(expenseController, "ExpenseController", "Spring Boot")
+    Component(expenseService, "ExpenseService", "Expense Service")
+    Component(authController, "AuthenticationController", "Spring Boot")
+    Component(authService, "AuthenticationService", "Authentication Service")
+    Component(expenseDao, "ExpenseDao", "Data Access")
+    Component(userDao, "UserDao", "Data Access")
+    Component(blackListDao, "BlackListDao", "Data Access")
+    Component(tokenProvider, "TokenProvider", "Token Provider")
+}
+
+ComponentDb(db, "Database")
+
+
+
+Rel(expenseController, expenseService, "Calls")
+Rel(expenseService, expenseDao, "Calls",)
+Rel(expenseDao, db, "Reads from and writes to")
+
+Rel(authController, authService, "Calls",)
+Rel(authService, userDao, "Calls")
+Rel(userDao, db, "Reads from and writes to")
+
+Rel(authService, tokenProvider, "Uses")
+Rel(tokenProvider, blackListDao, "Uses")
+Rel(blackListDao, db, "Reads from and writes to")
+
+
+
+@enduml

@@ -1,0 +1,94 @@
+@startuml
+
+class TripController {
+    +createStay(StayRequest): stayBouwSteen
+    +createFlight(FlightRequest): tlightBouwSteen
+    +createTrain(TrainRequest): trainBouwSteen
+}
+
+class TripService {
+    +createTrip(List<bouwSteen>): Trip
+}
+
+class   bookedTrip{
+    -tripId: ID
+    -payment: Payment
+    -status: TripStatus
+    -totalPrice: BigDecimal
+    -startDate: LocalDateTime
+    -endDate: LocalDateTime
+    -bouwStenen: List<bouwSteen>
+}
+
+class stayBouwSteen implements bouwSteen {
+  -ID : ID
+  -name : String
+  -price: BigDecimal
+  -startDate: LocalDateTime
+  -endDate: LocalDateTime
+  -status: Status
+}
+
+interface bouwSteen {
+  -API: String
+  -ID : ID
+  -name : String
+  -price: BigDecimal
+  -startDate: LocalDateTime
+  -endDate: LocalDateTime
+  -status: Status
+}
+
+interface BookingResponse {
+    -ID : ID
+    -name : String
+    -Date: LocalDateTime
+    -status: Status
+}
+
+class stayBookingResponse implements BookingResponse{
+   -ReservationID: ID
+}
+
+
+
+class vluchtAdapter {
+    +bookFlight(vluchtBouwSteen: vluchtBouwSteen): vluchtBookingResponse
+}
+
+class TrainAdapter {
+    +bookTrain(request: TrainBookingRequest): TrainBookingResponse
+}
+
+class StayAdapter {
+    +bookStay(request: StayBookingRequest): StayBookingResponse
+}
+
+
+class bookingAdapter {
+   +stayPreview(stayBouwsteen: StayBouwsteen): Token
+   +createStay(token: Token): StayBookingResponse
+}
+
+class PaymentAdapter {
+    +processPayment(request: PaymentRequest): PaymentResponse
+}
+
+class TripRepository {
+    +saveTrip(trip: Trip): void
+    +getTripById(tripId: UUID): Optional<Trip>
+    +getAllTrips(): List<Trip>
+    +updateTrip(trip: Trip): void
+    +deleteTrip(tripId: UUID): void
+}
+
+TripController --> TripService
+TripService --> FlightAdapter
+TripService --> TrainAdapter
+TripService --> StayAdapter
+TripService --> PaymentAdapter
+TripService --> TripRepository
+TripService --> BookedTrip
+TripRepository --> BookedTrip
+
+@enduml

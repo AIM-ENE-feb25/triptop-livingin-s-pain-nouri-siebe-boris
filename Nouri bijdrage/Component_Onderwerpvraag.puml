@@ -1,0 +1,39 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+skinparam ranksep 80
+skinparam nodesep 100
+skinparam ArrowColor #666666
+skinparam linetype ortho
+
+skinparam ArrowFontSize 12
+skinparam ArrowFontColor black
+skinparam ArrowFontStyle bold
+skinparam ArrowFontName Arial
+
+Container(frontend, "Webapplicatie", "React.js", "Gebruikersinterface voor het plannen en beheren van reizen")
+
+Container_Boundary(cb, "Backend") {
+    Component(tripcontroller, "TripController", "Spring Boot Controller", "Ontvangt HTTP-verzoeken en verwerkt reisboekingen")
+    Component(tripservice, "TripService", "Spring Boot Service", "Regelt de volledige afhandeling van boekingen en betalingen")
+    Component(stayadapter, "OvernachtingAdapter", "Spring Boot Adapter", "Regelt accommodaties bij boekingsplatformen")
+    Component(triprepository, "TripRepository", "Spring Boot Repository", "Slaat boekingsgegevens op in de database")
+}
+
+
+
+    System_Ext(stay, "Accommodatie API (Booking.com, Airbnb)", "Ontvangt reserveringen voor accommodaties")
+    ComponentDb(db, "Database", "Slaat reis- en betalingsgegevens op")
+
+
+Rel(frontend, tripcontroller, "Stuurt boekingsaanvragen naar")
+Rel(tripcontroller, tripservice, "Handelt boekingen af via")
+
+Rel(tripservice, stayadapter, "Boekt accommodatie bij")
+Rel(stayadapter, stay, "Stuurt reservering naar")
+
+
+Rel(tripservice, triprepository, "Slaat boekingsgegevens op in")
+Rel(triprepository, db, "Beheert de opslag van boekingen en betalingen in")
+
+@enduml
