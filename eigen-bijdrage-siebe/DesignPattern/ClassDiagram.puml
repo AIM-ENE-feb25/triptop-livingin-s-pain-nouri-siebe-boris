@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface hotelAdapter{
+    boekAccommodatie()
+    wijzigAccommodatie()
+    annuleerAccommodatie()
+
+}
+class bookingAdapter
+class airbnbAdapter
+
+hotelAdapter <|.. bookingAdapter
+hotelAdapter <|.. airbnbAdapter
+
+
+@enduml
