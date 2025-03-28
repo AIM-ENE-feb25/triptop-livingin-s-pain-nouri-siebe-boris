@@ -1,4 +1,4 @@
-# Architectural Decision Record (ADR-02)
+# Design pattern (ADR-02)
 
 ## Status
 
