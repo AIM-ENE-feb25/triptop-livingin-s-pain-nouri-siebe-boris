@@ -26,12 +26,12 @@ together{
     ComponentDb(db, "Database")
 }
 
-    Rel(frontend, tripcontroller, "")
-    Rel(tripcontroller, tripservice, "")
-    Rel(tripservice, stayadapter, "")
-    Rel(stayadapter, stay, "")
+    Rel(frontend, tripcontroller, "Uses")
+    Rel(tripcontroller, tripservice, "Uses")
+    Rel(tripservice, stayadapter, "Uses")
+    Rel(stayadapter, stay, "Uses")
 
-    Rel(tripservice, triprepository, "")
-    Rel(triprepository, db, "")
+    Rel(tripservice, triprepository, "Uses")
+    Rel(triprepository, db, "Uses")
 
 @enduml

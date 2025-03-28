@@ -1,17 +1,122 @@
 @startuml
 'https://plantuml.com/class-diagram
+skinparam linetype ortho
 
-interface hotelAdapter{
-    boekAccommodatie()
-    wijzigAccommodatie()
-    annuleerAccommodatie()
+class TripController {
+    +createTrip(request: TripRequestDTO) : Trip
+    +bookTrip(request: tripId) : void
+    +wijzigTrip(request: tripId) : void
+    +deleteTrip(request: tripId) : void
+}
+
+class TripService {
+    +createTrip(request: TripRequestDTO) : Trip
+    +bookTrip(request: tripId) : void
+    +updateTrip(request: tripId) : void
+    +deleteTrip(request: tripId) : void
 
 }
-class bookingAdapter
-class airbnbAdapter
 
-hotelAdapter <|.. bookingAdapter
-hotelAdapter <|.. airbnbAdapter
+class TripRepository {
+    +getAllTrips() : List<Trip>
+    +getTrip(tripId: Long) : Trip
+    +saveTrip(trip: Trip) : void
+    +deleteTrip(tripId: Long) : void
+    +updateTrip(trip: Trip) : void
+}
+
+
+
+class Gebruiker {
+    voornaam: String
+    achternaam: String
+    geboortedatum: String
+    adres: String
+    email : String
+    telefoonnummer : String
+    IBAN : String
+}
+
+rectangle "Aggregate" {
+
+class Trip <<AR>> {
+    id: Long
+    username: String
+    List<Reiziger> reizigers
+    list<BouwSteen> bouwStenen
+    +addBouwSteen(bouwSteen: BouwSteen) : void
+    +addPerson(person: Person) : void
+}
+
+
+class Reiziger {
+    voornaam: String
+    achternaam: String
+    geboortedatum: String
+    adres: String
+}
+
+class BouwSteen {
+    status: Status
+    data: Data
+    +addData(data: Data) : void
+    +setStatus(status: Status) : void
+}
+
+enum Status {
+    AVAILABLE
+    UNAVAILABLE
+    IN_PROGRESS
+    FINISHED
+}
+
+}
+
+interface Data {
+  getInfo() : String
+}
+
+class StayData implements Data {
+ getInfo() : String
+}
+
+interface Adapter {
+    +book(data: Data) : void
+    +cancel(data: Data) : void
+    +update(data: Data) : void
+}
+
+
+class BookingAdapter implements Adapter {
+    +book(data: Data) : void
+    +cancel(data: Data) : void
+    +update(data: Data) : void
+}
+
+
+
+class TripRequestDTO {
+    List<Reiziger> reizigers
+    List<Data> data
+}
+
+
+
+TripController "1" -- "1" TripService
+TripService "1" -- "1" TripRepository
+TripController "1" -- "*" TripRequestDTO
+
+TripService "1" -- "*" Trip
+TripService "1" -- "*" Adapter
+
+
+BouwSteen "1" -- "1" Data
+BouwSteen "1" -- "1" Status
+Trip "1" -- "*" BouwSteen
+Trip "1" -- "*" Reiziger
+Trip "1" -- "1" Gebruiker
+
+
 
 
 @enduml
