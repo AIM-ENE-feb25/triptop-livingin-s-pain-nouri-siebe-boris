@@ -53,7 +53,6 @@ class Reiziger {
     voornaam: String
     achternaam: String
     geboortedatum: String
-    adres: String
 }
 
 class BouwSteen {
