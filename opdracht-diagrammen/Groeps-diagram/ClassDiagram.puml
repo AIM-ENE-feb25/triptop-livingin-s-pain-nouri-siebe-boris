@@ -72,11 +72,21 @@ enum Status {
 }
 
 interface Data {
-  getInfo() : String
+    + getProvider() : String
+    + getExtraData(key: String) : Object
+    + addExtraData(key: String, value: Object): void
+    + getInfo() : String
 }
 
 class StayData implements Data {
- getInfo() : String
+ - provider: String
+ - extraData: Map<String, Object>
+ + StayData(provider: String)
+  + addExtraData(key: String, value: Object): void
+  + getExtraData(key: String): Object
+ + getProvider(): String
+ + getInfo(): String
+  + getBookingOrderData(): Map<String, Object>
 }
 
 interface Adapter {
@@ -111,8 +121,8 @@ TripService "1" -- "*" Adapter
 
 BouwSteen "1" -- "1" Data
 BouwSteen "1" -- "1" Status
-Trip "1" -- "*" BouwSteen
-Trip "1" -- "*" Reiziger
+Trip "1" -- "1,*" BouwSteen
+Trip "1" -- "0,*" Reiziger
 Trip "1" -- "1" Gebruiker
 
 
