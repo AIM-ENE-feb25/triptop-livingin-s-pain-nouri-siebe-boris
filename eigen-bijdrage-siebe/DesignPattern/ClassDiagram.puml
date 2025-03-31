@@ -64,10 +64,11 @@ class BouwSteen {
 }
 
 enum Status {
-    AVAILABLE
-    UNAVAILABLE
-    IN_PROGRESS
-    FINISHED
+    GEPLAND
+    GEREGELD
+    BETBAALD
+    NIET UITVOERBAAR
+    UITGEVOERD
 }
 
 }
