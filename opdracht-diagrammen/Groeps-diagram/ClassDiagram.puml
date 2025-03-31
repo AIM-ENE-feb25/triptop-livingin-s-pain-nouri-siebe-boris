@@ -72,21 +72,11 @@ enum Status {
 }
 
 interface Data {
-    + getProvider() : String
-    + getExtraData(key: String) : Object
-    + addExtraData(key: String, value: Object): void
-    + getInfo() : String
+  getInfo() : String
 }
 
 class StayData implements Data {
- - provider: String
- - extraData: Map<String, Object>
- + StayData(provider: String)
-  + addExtraData(key: String, value: Object): void
-  + getExtraData(key: String): Object
- + getProvider(): String
- + getInfo(): String
-  + getBookingOrderData(): Map<String, Object>
+ getInfo() : String
 }
 
 interface Adapter {
