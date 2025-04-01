@@ -1,17 +1,28 @@
 package org.example.proto.Services;
 
+import org.example.proto.Adapters.VerblijfAdapter;
 import org.example.proto.Domain.BouwSteen;
 import org.example.proto.Domain.Data;
 import org.example.proto.Domain.Reiziger;
 import org.example.proto.Domain.Trip;
 import org.example.proto.Repo.TripRepository;
 import org.example.proto.Request.TripRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
 public class TripService {
     private final TripRepository tripRepository;
+
+    @Autowired
+    @Qualifier("airbnbAdapter")
+    private VerblijfAdapter airbnbAdapter;
+
+    @Autowired
+    @Qualifier("bookingcomAdapter")
+    private VerblijfAdapter bookingcomAdapter;
 
     public TripService(TripRepository tripRepository) {
         this.tripRepository = tripRepository;
@@ -33,8 +44,6 @@ public class TripService {
         return tripRepository.save(trip);
     }
 
-
-
     public void boekTrip(String tripId) {
         Optional<Trip> optionalTrip = tripRepository.findById(tripId);
         if (optionalTrip.isPresent()) {
@@ -54,5 +63,22 @@ public class TripService {
 
     public void verwijderTrip(String tripId) {
         tripRepository.deleteById(tripId);
+    }
+
+    public Trip updateTrip(int tripid) {
+        List<BouwSteen> bouwStenen = new ArrayList<>();
+        for (BouwSteen bouwSteen : bouwStenen) {
+            for (Data data : bouwSteen.data()) {
+                switch (data.provider()) {
+                    case AIRBNB:
+                        bouwSteen.setData(airbnbAdapter.updateVerblijf(bouwSteen.getData()));
+                        break;
+                    case BOOKINGCOM:
+                        bouwSteen.setData(bookingcomAdapter.updateVerblijf(bouwSteen.getData()));
+                        break;
+                }
+            }
+        }
+        return null;
     }
 }
