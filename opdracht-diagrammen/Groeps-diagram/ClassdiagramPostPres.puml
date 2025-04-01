@@ -1,0 +1,109 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam linetype ortho
+
+class TripController {
+    +maakTrip(aanvraag: TripAanvraagDTO) : Trip
+    +boekTrip(aanvraag: tripId) : void
+    +wijzigTrip(aanvraag: tripId) : void
+    +verwijderTrip(aanvraag: tripId) : void
+}
+
+class TripService {
+    +maakTrip(aanvraag: TripAanvraagDTO) : Trip
+    +boekTrip(aanvraag: tripId) : void
+    +wijzigTrip(aanvraag: tripId) : void
+    +verwijderTrip(aanvraag: tripId) : void
+}
+
+class TripRepository {
+    +haalAlleTripsOp() : List<Trip>
+    +haalTripOp(tripId: Long) : Trip
+    +slaTripOp(trip: Trip) : void
+    +verwijderTrip(tripId: Long) : void
+    +wijzigTrip(trip: Trip) : void
+}
+
+class Gebruiker {
+    voornaam: String
+    achternaam: String
+    geboortedatum: String
+    adres: String
+    email : String
+    telefoonnummer : String
+    IBAN : String
+}
+
+rectangle "Aggregate" {
+
+class Trip <<AR>> {
+    id: Long
+    gebruikersnaam: String
+    List<Reiziger> reizigers
+    list<BouwSteen> bouwStenen
+    +voegBouwSteenToe(bouwSteen: BouwSteen) : void
+    +voegPersoonToe(persoon: Persoon) : void
+}
+
+class Reiziger {
+    voornaam: String
+    achternaam: String
+    geboortedatum: String
+}
+
+class BouwSteen {
+    status: Status
+    data: Data
+    +voegDataToe(data: Data) : void
+    +stelStatusIn(status: Status) : void
+}
+
+enum Status {
+   GEPLAND
+   GEREGELD
+   BETBAALD
+   NIET UITVOERBAAR
+   UITGEVOERD
+}
+
+class Data {
+  +Data(jsonString: String)
+  +stelJsonDataIn(jsonString: String): void
+  +haalJsonDataOp(): String
+  +haalJsonNodeOp(): JsonNode
+}
+}
+
+
+
+interface Adapter {
+    +boek(data: Data) : void
+    +annuleer(data: Data) : void
+    +wijzig(data: Data) : void
+}
+
+class BoekingsAdapter implements Adapter {
+    +boek(data: Data) : void
+    +annuleer(data: Data) : void
+    +wijzig(data: Data) : void
+}
+
+class TripAanvraagDTO {
+    List<Reiziger> reizigers
+    List<Data> data
+}
+
+TripController "1" -- "1" TripService
+TripService "1" -- "1" TripRepository
+TripController "1" -- "*" TripAanvraagDTO
+
+TripService "1" -- "*" Trip
+TripService "1" -- "*" Adapter
+
+BouwSteen "1" -- "1" Data
+BouwSteen "1" -- "1" Status
+Trip "1" -- "1,*" BouwSteen
+Trip "1" -- "0,*" Reiziger
+Trip "1" -- "1" Gebruiker
+
+@enduml
