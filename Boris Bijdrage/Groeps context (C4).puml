@@ -1,0 +1,34 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+title Triptop Context Diagram
+SHOW_PERSON_OUTLINE()
+
+Person(personAlias, "Reiziger", "Een gebruiker die TripTop wilt gebruiken, voor het plannen en het boeken van een reis.")
+Person(reisagent,"Reis Agent", "Een gebruiker die de reiziger ondersteunt bij het plannen van een reis.")
+System(systemAlias, "TripTop", "Reis applicatie")
+
+System_Ext(vervoersaanbieder, "Vervoersaanbieder (NS, Sixt, KLM, Uber....)", "Bieden vervoers informatie en boeken vervoer")
+System_Ext(betalingsprovider, "Betalingsprovider", "Verwerkt de betalingen")
+System_Ext(accommodatieaanbieder, "Accommodatie aanbieder (Booking.com, Airbnb....)", "Bieden accommodatie informatie en boeken accommodatie")
+System_Ext(activiteitenaanbieder, "Activiteiten aanbieder (Tripadvisor....)", "Bieden activiteiten informatie en boeken activiteiten")
+System_Ext(identityProvider, "Identity provider (Google, Facebook....)", "Zorgt voor de identiteit van de gebruiker")
+System_Ext(etengelegenhedenaanbieder, "Eten en drinken (Thuisbezorgd, Uber Eats....)", "Bieden eten en drinken informatie en bestellen eten en drinken")
+System_Ext(maps, "Kaart Provider (Google Maps)", "Toont de kaart")
+
+Rel(personAlias, systemAlias, "Wilt de applicatie gebruiken bij het plannen en boeken van een reis")
+Rel(reisagent, systemAlias, "Biedt hulp bij het plannen van een reis")
+
+Rel(systemAlias, vervoersaanbieder, "vraagt informatie over vervoer voor de bouwstenen en boekt vervoer")
+Rel(systemAlias, accommodatieaanbieder, "vraagt informatie over accommodatie voor de bouwstenen en boekt accommodatie")
+Rel(systemAlias, activiteitenaanbieder, "vraagt informatie over activiteiten voor de bouwstenen en boekt activiteiten")
+Rel(systemAlias, identityProvider, "vraagt informatie over de gebruiker en logt de gebruiker in")
+Rel(systemAlias, betalingsprovider, "vraagt informatie over de betaling en verwerkt de betaling")
+Rel(systemAlias, etengelegenhedenaanbieder, "vraagt informatie over eten en drinken voor de bouwstenen en bestelt eten en drinken")
+Rel(systemAlias, maps, "vraagt informatie over de kaart en toont de kaart")
+
+' Nieuwe relatie tussen reiscomponenten en TripTop systeem
+Rel(systemAlias, vervoersaanbieder, "vraagt informatie over vervoer voor reiscomponent Vervoer")
+Rel(systemAlias, activiteitenaanbieder, "vraagt informatie over activiteiten voor reiscomponent Activiteit")
+Rel(systemAlias, etengelegenhedenaanbieder, "vraagt informatie over eten en drinken voor reiscomponent EtenEnDrinken")
+
+@enduml

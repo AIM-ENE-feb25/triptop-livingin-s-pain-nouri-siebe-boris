@@ -1,0 +1,77 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml
+
+title Reis Boeken (Met Activiteiten & Eten) - TripTop
+autonumber
+
+actor "Reiziger" as reiziger
+
+System_Boundary(tripTopSystem, "TripTop")
+    Container(webApp, "Web Applicatie", "? (React)", "Helpt reizigers bij het plannen en boeken van reizen")
+    Container(backend, "Backend", "Springboot Java", "Verwerkt data en beheert bedrijfslogica")
+    ContainerDb(database, "Database", "SQL of NOSQL?", "Slaat gebruikersgegevens en geboekte reizen op")
+Boundary_End()
+
+System_Ext(wiremock, "Identity Provider API (WireMock)", "Simuleert identity provider")
+System_Ext(betalingApi, "Betaling API (? Mollie as voorbeeld)", "Voor het verwerken van betalingen")
+System_Ext(nsApi, "NS API", "Informatie over openbaar vervoer en het boeken van ritten")
+System_Ext(activiteitenApi, "Activiteiten API (Tripadvisor, GetYourGuide)", "Boekt activiteiten")
+System_Ext(etenEnDrinkenApi, "Eten & Drinken API (Thuisbezorgd, Uber Eats)", "Bestelt eten en drinken")
+
+== Reisinformatie Opvragen ==
+reiziger -> webApp: Vraagt reis op
+webApp -> nsApi: Vraagt beschikbare treinreizen op (HTTPS/REST)
+nsApi -> webApp: Stuurt treinopties (HTTPS)
+
+reiziger -> webApp: Selecteert gewenste treinreis
+
+== Optionele Activiteiten & Eten Opvragen ==
+webApp -> activiteitenApi: Vraagt beschikbare activiteiten op (HTTPS/REST)
+activiteitenApi -> webApp: Stuurt activiteitopties (HTTPS)
+
+webApp -> etenEnDrinkenApi: Vraagt beschikbare eetopties op (HTTPS/REST)
+etenEnDrinkenApi -> webApp: Stuurt eetopties (HTTPS)
+
+reiziger -> webApp: Selecteert activiteit(en) en/of eten & drinken
+
+reiziger -> webApp: Voert betaalgegevens in
+reiziger -> webApp: Bevestigt selectie
+
+webApp -> backend: Stuurt boekingsverzoek (HTTPS)
+
+== Autorisatie Controle ==
+alt Gebruiker niet ingelogd
+    backend -> wiremock: Verifieert gebruiker (HTTPS)
+    wiremock -> backend: Gebruiker niet geautoriseerd
+    backend -> webApp: foutmelding(HTTPS)
+else Gebruiker ingelogd
+    backend -> wiremock: Verifieert gebruiker (HTTPS)
+    wiremock -> backend: Gebruiker geautoriseerd
+
+== Beschikbaarheid controleren ==
+backend -> nsApi: Controleert treinreis beschikbaarheid (HTTPS/REST)
+backend -> activiteitenApi: Controleert activiteit beschikbaarheid (HTTPS/REST)
+backend -> etenEnDrinkenApi: Controleert eetopties beschikbaarheid (HTTPS/REST)
+
+alt Alles beschikbaar
+    backend -> betalingApi: Verwerkt betaling (HTTPS/REST)
+    
+    alt Betaling succesvol
+        backend -> nsApi: Boekt treinreis (HTTPS/REST)
+        backend -> activiteitenApi: Boekt activiteiten (HTTPS/REST)
+        backend -> etenEnDrinkenApi: Bestelt eten & drinken (HTTPS/REST)
+        
+        backend -> database: Slaat reserveringsgegevens op
+        backend -> webApp: Stuurt boekingsbevestiging (HTTPS)
+        webApp -> reiziger: Toont ticket en reisdetails
+    else Betaling mislukt
+        betalingApi -> backend: Betaling geweigerd
+        backend -> webApp: Stuurt betalingsfout (HTTPS)
+        webApp -> reiziger: Toont foutmelding
+    end
+else Eén of meer onderdelen niet beschikbaar
+    backend -> webApp: Stuurt foutmelding (HTTPS)
+    webApp -> reiziger: Toont foutmelding
+end
+
+@enduml
