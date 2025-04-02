@@ -33,4 +33,9 @@ public class TripController {
     public void verwijderTrip(@PathVariable String tripId) {
         tripService.verwijderTrip(tripId);
     }
+
+    @GetMapping("/bekijk/{tripId}")
+    public Trip bekijkTrip(@PathVariable String tripId) {
+        return tripService.bekijkTrip(tripId);
+    }
 }

@@ -65,20 +65,28 @@ public class TripService {
         tripRepository.deleteById(tripId);
     }
 
+    public Trip bekijkTrip(String tripId) {
+        return updateTrip(Integer.parseInt(tripId));
+    }
+
     public Trip updateTrip(int tripid) {
-        List<BouwSteen> bouwStenen = new ArrayList<>();
-        for (BouwSteen bouwSteen : bouwStenen) {
-            for (Data data : bouwSteen.data()) {
-                switch (data.provider()) {
-                    case AIRBNB:
-                        bouwSteen.setData(airbnbAdapter.updateVerblijf(bouwSteen.getData()));
-                        break;
-                    case BOOKINGCOM:
-                        bouwSteen.setData(bookingcomAdapter.updateVerblijf(bouwSteen.getData()));
-                        break;
-                }
-            }
-        }
-        return null;
+//        Trip trip = tripRepository.findById(String.valueOf(tripid)).get();
+//        List<BouwSteen> bouwStenen = trip.getBouwStenen();
+//        for (BouwSteen bouwSteen : bouwStenen) {
+//            Data data = bouwSteen.getData();
+//                switch (data.haalJsonNodeOp().findValues("provider").get(0).asText()) {
+//                    case "airbnb":
+//                        bouwSteen.setData(airbnbAdapter.updateVerblijf(bouwSteen.getData()));
+//                        break;
+//                    case "bookingcom":
+//                        bouwSteen.setData(bookingcomAdapter.updateVerblijf(bouwSteen.getData()));
+//                        break;
+//                }
+//            }
+//        return null;
+
+        Data mockData = new Data("{\"id\": 123 }");
+        bookingcomAdapter.updateVerblijf(mockData, 2);
+       return new Trip();
     }
 }

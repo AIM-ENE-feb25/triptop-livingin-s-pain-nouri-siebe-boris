@@ -1,4 +1,4 @@
-POST http://localhost:8080/maak
+POST http://localhost:8080/trips/maak
 Content-Type: application/json
 
 {

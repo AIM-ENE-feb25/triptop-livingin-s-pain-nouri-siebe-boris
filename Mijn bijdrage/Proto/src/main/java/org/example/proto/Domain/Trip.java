@@ -14,11 +14,14 @@ public class Trip {
         private List<Reiziger> reizigers;
         private List<BouwSteen> bouwStenen;
 
-
-
         public void voegBouwSteenToe(BouwSteen bouwSteen) {
         }
 
         public void voegReizigerToe(Reiziger reiziger) {
         }
+
+        public List<BouwSteen> getBouwStenen() {
+            return bouwStenen;
+        }
+
 }

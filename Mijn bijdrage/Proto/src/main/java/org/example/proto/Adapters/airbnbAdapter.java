@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class airbnbAdapter implements VerblijfAdapter {
 
     @Override
-    public Data updateVerblijf(Data data) {
+    public Data updateVerblijf(Data data, int aantalReizigers) {
         return null;
     }
 }
