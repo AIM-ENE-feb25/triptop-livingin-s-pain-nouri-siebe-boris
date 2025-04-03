@@ -1,0 +1,110 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam linetype ortho
+
+class TripController {
+    -tripService: TripService
+    +TripController(tripService: TripService)
+    +maakTrip(aanvraag: TripRequest): Trip
+    +boekTrip(tripId: String): void
+    +wijzigTrip(tripId: String): void
+    +verwijderTrip(tripId: String): void
+}
+
+class TripService {
+    -tripRepository: TripRepository
+    +TripService(tripRepository: TripRepository)
+    +maakTrip(aanvraag: TripRequest) : Trip
+    +boekTrip(tripId: String) : void
+    +wijzigTrip(tripId: String) : void
+    +verwijderTrip(tripId: String) : void
+}
+
+interface TripRepository extends MongoRepository<Trip, String> {
+}
+
+class Gebruiker {
+    voornaam: String
+    achternaam: String
+    geboortedatum: String
+    adres: String
+    email : String
+    telefoonnummer : String
+    IBAN : String
+}
+
+rectangle "Aggregate" {
+
+class Trip <<AR>> {
+    -id: ObjectId
+    -gebruikersnaam: String
+    -reizigers: List<Reiziger>
+    -bouwStenen: List<BouwSteen>
+    +Trip(gebruikersnaam: String)
+}
+
+class Reiziger {
+    voornaam: String
+    achternaam: String
+    geboortedatum: String
+}
+
+class BouwSteen {
+    -status: Status
+    -provider: String
+    -categorie: String
+    -data: Data
+    +BouwSteen(status: Status, categorie: String, provider: String, jsonData: JsonNode)
+}
+
+enum Status {
+   GEPLAND
+   GEREGELD
+   BETBAALD
+   NIET UITVOERBAAR
+   UITGEVOERD
+}
+
+class Data  {
+    -static objectMapper: ObjectMapper
+    +Data()
+    +Data(jsonNode: JsonNode)
+    -getValueFromNode(node: JsonNode): Object
+    +toJsonString(): String
+}
+
+}
+
+interface Adapter {
+    +boek(data: Data) : void
+    +annuleer(data: Data) : void
+    +wijzig(data: Data) : void
+}
+
+class BoekingsAdapter implements Adapter {
+    +boek(data: Data) : void
+    +annuleer(data: Data) : void
+    +wijzig(data: Data) : void
+}
+
+class TripRequest {
+    +gebruikersnaam: String
+    +reizigers: List<Reiziger>
+    +bouwstenen: Map<String, List<JsonNode>>
+    +TripRequest(gebruikersnaam: String, reizigers: List<Reiziger>, bouwstenen: Map<String, List<JsonNode>>)
+}
+
+TripController "1" -- "1" TripService
+TripService "1" -- "1" TripRepository
+TripController "1" -- "*" TripRequest
+
+TripService "1" -- "*" Trip
+TripService "1" -- "*" Adapter
+
+BouwSteen "1" -- "1" Data
+BouwSteen "1" -- "1" Status
+Trip "1" -- "1,*" BouwSteen
+Trip "1" -- "0,*" Reiziger
+Trip "1" -- "1" Gebruiker
+
+@enduml
