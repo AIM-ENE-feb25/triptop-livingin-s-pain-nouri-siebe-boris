@@ -38,28 +38,28 @@ together{
 
 }
 
-    Rel(frontend, logincontroller, "")
-    Rel(frontend, tripcontroller, "")
+  Rel(frontend, logincontroller, "HTTP/REST aanroepen voor authenticatie")
+  Rel(frontend, tripcontroller, "HTTP/REST aanroepen voor reisbeheer")
 
-    Rel(logincontroller, loginservice, "")
-    Rel(tripcontroller, tripservice, "")
+  Rel(logincontroller, loginservice, "Gebruikt voor gebruikersauthenticatie")
+  Rel(tripcontroller, tripservice, "Gebruikt voor reisoperaties")
 
-    Rel(tripservice, loginservice, "")
+  Rel(tripservice, loginservice, "Valideert gebruikersrechten")
 
-    Rel(tripservice, flightadapter, "")
-    Rel(tripservice, trainadapter, "")
-    Rel(tripservice, stayadapter, "")
-    Rel(tripservice, paymentadapter, "")
-    Rel(trainadapter, ns, "")
-    Rel(stayadapter, stay, "")
-    Rel(flightadapter, flight, "")
-    Rel(paymentadapter, payment, "")
+  Rel(tripservice, flightadapter, "Boekt vluchten")
+  Rel(tripservice, trainadapter, "Beokte treinen")
+  Rel(tripservice, stayadapter, "Boekt accomodaties")
+  Rel(tripservice, paymentadapter, "Initieert betalingstransacties")
+  Rel(trainadapter, ns, "Roept NS API aan")
+  Rel(stayadapter, stay, "Roept accomodatie API aan")
+  Rel(flightadapter, flight, "Roept vluchten api aan")
+  Rel(paymentadapter, payment, "Verwerkt betalingen")
 
-    Rel(tripservice, triprepository, "")
-    Rel(triprepository, db, "")
+  Rel(tripservice, triprepository, "Bewaart en haalt reisgegevens op")
+  Rel(triprepository, db, "CRUD operaties")
 
-    Rel(loginservice, loginadapter, "")
-    Rel(loginadapter, idprovider, "")
+  Rel(loginservice, loginadapter, "Delegeert authenticatie")
+  Rel(loginadapter, idprovider, "Verifieert inloggegevens")
 
 
 

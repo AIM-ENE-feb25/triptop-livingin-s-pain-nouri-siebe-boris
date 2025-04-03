@@ -1,7 +1,6 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-
 skinparam ranksep 80
 skinparam nodesep 100
 skinparam ArrowColor #666666
@@ -12,152 +11,120 @@ skinparam ArrowFontColor black
 skinparam ArrowFontStyle bold
 skinparam ArrowFontName Arial
 
-title Component Diagram - TripTop
-
-
-
+title Componentendiagram - TripTop
 
 Person(reiziger, "Reiziger", "Een gebruiker die TripTop wil gebruiken voor het plannen van een reis")
-Person(reisagent, "Reis Agent", "Een gebruiker die reizigers ondersteunt bij het plannen van hun reis")
+Person(reisagent, "Reisagent", "Een gebruiker die reizigers ondersteunt bij het plannen van hun reis")
 
-
-Container_Boundary(cb, "Web Application") {
+Container_Boundary(cb, "Webapplicatie") {
 together{
-Component(loginform, "Login Form")
-Component(loginPage, "Login Page")
-}
-
-
-together{
-Component(homePage, "Home Page")
-Component(homeMessage, "Home Message")
+Component(loginform, "Inlogformulier")
+Component(loginPage, "Inlogpagina")
 }
 
 together{
-Component(tripOverview, "Trip Overview")
-Component(bookingPage, "Booking page")
-Component(bouwsteenHolder, "Bouwsteen Holder")
+Component(homePage, "Homepagina")
+Component(homeMessage, "Homebericht")
+}
+
+together{
+Component(tripOverview, "Reisoverzicht")
+Component(bookingPage, "Boekingspagina")
+Component(bouwsteenHolder, "Bouwsteenhouder")
 Component(bouwsteen, "Bouwsteen")
-Component(map, "Map")
-Component(bouwsteenDetail, "Bouwsteen Detail")
-Component(categoryLabel, "Category label")
-Component(resevationForm, "Reservation Form")
-}
-
-
-together{
-Component(accountPage, "Account Page")
-Component(accountMenu, "Account Menu")
-Component(accountLink, "Account Link")
-Component(bookedTrips, "Booked Trips")
+Component(map, "Kaart")
+Component(bouwsteenDetail, "Bouwsteendetails")
+Component(categoryLabel, "Categorie-label")
+Component(resevationForm, "Reserveringsformulier")
 }
 
 together{
-Component(reisAgentPage, "Reis Agent Page")
-Component(reisAgentDashboard, "Reis Agent Dashboard")
-Component(pendingTrips, "Pending Trips")
+Component(accountPage, "Accountpagina")
+Component(accountMenu, "Accountmenu")
+Component(accountLink, "Accountlink")
+Component(bookedTrips, "Geboekte reizen")
 }
 
 together{
-Component(betalingsPage, "Betalings Page")
-Component(orderOverview, "Order Overview")
-Component(gegevensForm, "Gegevens Form")
-
+Component(reisAgentPage, "Reisagentpagina")
+Component(reisAgentDashboard, "Reisagent-dashboard")
+Component(pendingTrips, "In afwachting reizen")
 }
 
+together{
+Component(betalingsPage, "Betalingspagina")
+Component(orderOverview, "Bestellingsoverzicht")
+Component(gegevensForm, "Gegevensformulier")
+}
 
 together{
 Component(router, "Router")
 Component(app, "App")
-Component(navbar, "Navbar")
-Component(footer, "Footer")
+Component(navbar, "Navigatiebalk")
+Component(footer, "Voettekst")
 }
 
-
-
-Component(searchbar, "Search Bar")
+Component(searchbar, "Zoekbalk")
 
 }
 
 together{
 System_Ext(googleMapsApi, "Google Maps API", "Biedt navigatie en locatiegegevens")
 System_Ext(weerApi, "Open Weather API", "Geeft weerinformatie voor specifieke locaties")
-  System_Ext(nsApi, "NS API", "Informatie over openbaar vervoer en het boeken van ritten")
-  System_Ext(overnachtingApi, "Overnachting API (Booking.com, Airbnb)", "Voor het vinden en boeken van accommodaties")
-  System_Ext(vluchtApi, "Vluchten API (Skyscanner, Google flights)", "Voor het vinden en boeken van vluchten")
-  System_Ext(identityApi, "Identity Provider API (WireMock)", "Simuleert identity provider")
+System_Ext(nsApi, "NS API", "Levert OV-informatie en boekingsopties")
+System_Ext(overnachtingApi, "Overnachting API (Booking.com, Airbnb)", "Voor het vinden en boeken van accommodaties")
+System_Ext(vluchtApi, "Vluchten API (Skyscanner, Google Flights)", "Voor het vinden en boeken van vluchten")
+System_Ext(identityApi, "Identity Provider API (WireMock)", "Simuleert een identity provider")
 }
 
+' Systeem externe relaties
+Rel(bookingPage, searchbar, "Maakt gebruik van")
+Rel(bouwsteenHolder, weerApi, "Haalt weersvoorspellingen op bij")
+Rel(bouwsteenHolder, nsApi, "Haalt treininformatie op bij")
+Rel(bouwsteenHolder, overnachtingApi, "Haalt accommodatie-informatie op bij")
+Rel(bouwsteenHolder, vluchtApi, "Haalt vluchtinformatie op bij")
+Rel(loginform, identityApi, "Controleert identiteit via")
 
-'systeem ext relatie
-Rel(bookingPage, searchbar, "Uses")
-Rel(bouwsteenHolder, weerApi,"Get weather forcast from")
-Rel(bouwsteenHolder, nsApi,"Get Train info from")
-Rel(bouwsteenHolder, overnachtingApi,"Get accomodation info from")
-Rel(bouwsteenHolder, vluchtApi,"Get flight info from")
-Rel(loginform, identityApi,"Get identity info from")
+Rel(map, googleMapsApi, "Haalt geolocatie-informatie op bij")
 
-Rel(map, googleMapsApi, "Get Geo location info from")
+' Gebruikersrelaties
+Rel(reiziger, app, "Maakt gebruik van")
+Rel(reisagent, app, "Maakt gebruik van")
 
+' Applicatiestructuur
+Rel(app, router, "Maakt gebruik van")
+Rel(app, navbar, "Maakt gebruik van")
+Rel(app, footer, "Maakt gebruik van")
 
+Rel(router, homePage, "Routeert naar")
+Rel(router, loginPage, "Routeert naar")
+Rel(router, bookingPage, "Routeert naar")
+Rel(router, accountPage, "Routeert naar")
+Rel(router, reisAgentPage, "Routeert naar")
+Rel(router, betalingsPage, "Routeert naar")
 
+Rel(homePage, homeMessage, "Bevat")
+Rel(homePage, searchbar, "Bevat")
 
+Rel(accountPage, accountMenu, "Bevat")
+Rel(reisAgentPage, reisAgentDashboard, "Bevat")
 
+Rel(reisAgentDashboard, pendingTrips, "Toont")
 
+Rel(bookingPage, bouwsteenHolder, "Bevat")
+Rel(bookingPage, map, "Bevat")
+Rel(bookingPage, categoryLabel, "Bevat")
 
+Rel(bouwsteenHolder, bouwsteen, "Bevat")
+Rel(bouwsteen, bouwsteenDetail, "Toont details van")
 
+Rel(accountMenu, accountLink, "Bevat")
+Rel(accountMenu, bookedTrips, "Bevat")
+Rel(loginPage, loginform, "Bevat")
 
-Rel(reiziger, app, "Uses")
-Rel(reisagent, app, "Uses")
-
-
-
-
-Rel(app, router, "Uses")
-Rel(app, navbar, "Uses")
-Rel(app, footer, "Uses")
-
-Rel(router, homePage, "Routes")
-Rel(router, loginPage, "Routes")
-Rel(router, bookingPage, "Routes")
-Rel(router, accountPage, "Routes")
-Rel(router, reisAgentPage, "Routes")
-Rel(router, betalingsPage, "Routes")
-
-Rel(homePage, homeMessage, "Contains")
-Rel(homePage, searchbar, "Contains")
-
-Rel(accountPage, accountMenu, "Contains")
-Rel(reisAgentPage, reisAgentDashboard, "Contains")
-
-
-
-Rel(reisAgentDashboard, pendingTrips, "Uses")
-
-Rel(bookingPage, bouwsteenHolder, "Contains")
-Rel(bookingPage, map, "Contains")
-Rel(bookingPage, categoryLabel, "Contains")
-
-Rel(bouwsteenHolder, bouwsteen, "Contains")
-Rel(bouwsteen,bouwsteenDetail, "Uses")
-
-
-
-
-Rel(accountMenu, accountLink, "Contains")
-Rel(accountMenu, bookedTrips, "Contains")
-Rel(loginPage, loginform, "Contains")
-
-Rel(bookingPage, resevationForm, "Contains")
-Rel(bookingPage, tripOverview, "Contains")
-
-
-
-
+Rel(bookingPage, resevationForm, "Bevat")
+Rel(bookingPage, tripOverview, "Bevat")
 
 Component(be, "Back-end")
-
-
-
 
 @enduml

@@ -1,0 +1,56 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml
+
+title Een trip aanmaken met vrschilende bouwstenen - TripTop
+autonumber
+
+
+participant "HTTP" as Client
+participant "TripController" as Controller
+participant "TripService" as Service
+participant "Trip" as Trip
+participant "BouwSteen" as BouwSteen
+participant "Data" as Data
+participant "TripRepository" as Repository
+
+Client -> Controller: maakTrip(tripRequest)
+activate Controller
+
+Controller -> Service: maakTrip(tripRequest)
+activate Service
+
+Service -> Trip: new Trip(gebruikersnaam)
+activate Trip
+
+Service -> Trip: addReizigers(tripRequest.reizigers)
+
+loop for each entry in tripRequest.bouwstenen
+
+
+    loop for each JsonNode in category list
+        Service -> Data: new Data(jsonNode)
+        activate Data
+        Data --> Service: data object
+        deactivate Data
+
+        Service -> BouwSteen: new BouwSteen(GEPLAND, category, provider, data)
+        activate BouwSteen
+        BouwSteen --> Service: bouwSteen object
+        deactivate BouwSteen
+
+        Service -> Trip: addBouwSteen(bouwSteen)
+    end
+end
+
+Service -> Repository: save(trip)
+activate Repository
+Repository --> Service: saved trip with generated ID
+deactivate Repository
+
+Service --> Controller: return trip
+deactivate Service
+
+Controller --> Client: return trip
+deactivate Controller
+
+@enduml

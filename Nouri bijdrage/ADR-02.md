@@ -1,8 +1,9 @@
 # Design pattern (ADR-02)
 
-## Status
+**Status**: Accepted  
+**Datum**: 31 maart 2025  
+**Auteur**: Nouri el Akel Rahhali
 
-_Accepted_
 ## Context
 
 Voor de Triptop-applicatie is de volgende ontwerpvraag geformuleerd:  
