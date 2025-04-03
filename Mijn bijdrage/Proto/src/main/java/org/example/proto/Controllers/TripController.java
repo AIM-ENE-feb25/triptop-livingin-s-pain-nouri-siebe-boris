@@ -6,7 +6,7 @@ import org.example.proto.Services.TripService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/trips")
+@RequestMapping("/trip")
 public class TripController {
     private final TripService tripService;
 

@@ -1,7 +1,8 @@
-POST http://localhost:8080/maak
+POST http://localhost:8080/trip/maak
 Content-Type: application/json
 
 {
+  "gebruikersnaam": "testuser",
   "reizigers": [
     {
       "voornaam": "Jan",
@@ -16,9 +17,85 @@ Content-Type: application/json
   ],
   "data": [
     {
-      "hotelNaam": "Grand Hotel",
-      "adres": "123 Hotelstraat, Amsterdam",
-      "aantalNachten": 3
+        "categorie": "accommodatie",
+        "provider": "bookingcom",
+        "hotel": "Grand Hotel",
+        "adres": "123 Hotelstraat, Amsterdam",
+        "aantalNachten": 3
+      },
+    {
+      "categorie": "activiteiten",
+      "provider": "rijksmuseum",
+      "naam": "Rijksmuseum",
+      "datum": "2023-10-01"
     }
+
   ]
+}
+###
+
+
+
+
+POST http://localhost:8080/trip/maak
+Content-Type: application/json
+
+{
+  "gebruikersnaam": "testuser",
+  "reizigers": [
+    {
+      "voornaam": "Jan",
+      "achternaam": "Jansen",
+      "geboortedatum": "1985-06-15"
+    },
+    {
+      "voornaam": "Piet",
+      "achternaam": "Pietersen",
+      "geboortedatum": "1990-11-25"
+    }
+  ],
+  "bouwstenen": {
+    "accommodatie": [
+      {
+        "provider": "bookingcom",
+        "data": [
+          {
+            "hotel": "Grand Hotel",
+            "adres": "123 Hotelstraat, Amsterdam",
+            "aantalNachten": 3
+          },
+          {
+            "hotel": "City Inn",
+            "adres": "456 Centrumweg, Rotterdam",
+            "aantalNachten": 2
+          }
+        ]
+      },
+      {
+        "provider": "airbnb",
+        "data": [
+          {
+            "hotel": "Cozy Loft",
+            "adres": "789 Grachtenstraat, Utrecht",
+            "aantalNachten": 4
+          }
+        ]
+      }
+    ],
+    "activiteiten": [
+      {
+        "provider": "museum",
+        "data": [
+          {
+            "naam": "Rijksmuseum",
+            "datum": "2023-10-01"
+          },
+          {
+            "naam": "Van Gogh Museum",
+            "datum": "2023-10-02"
+          }
+        ]
+      }
+    ]
+  }
 }
