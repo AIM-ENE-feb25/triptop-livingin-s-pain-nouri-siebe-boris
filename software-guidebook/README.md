@@ -124,7 +124,7 @@ De relaties tussen de componenten zijn duidelijk weergegeven: de frontend maakt 
 
 ![Sequence Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/Sequence_Trein_Boeken.png)
 
-Dit diagram toont het proces van het boeken van een treinreis via de TripTop webapp. Het beschrijft de interactie tussen de reiziger, de webapp, backend, externe systemen zoals de NS API, betaling API, en een identity provider (WireMock).
+Dit diagram toont het proces van het boeken van een treinreis via TripTop. Het beschrijft de interactie tussen de reiziger, de webapp, backend, externe systemen zoals de NS API, betaling API, en een identity provider (WireMock).
 
 1. De reiziger vraagt reisopties op via de webapp, die vervolgens de NS API raadpleegt voor beschikbare treinreizen.
 2. Na het kiezen van een treinreis en invoeren van betaalgegevens, wordt een boekingsverzoek naar de backend gestuurd.
