@@ -2,46 +2,7 @@ POST http://localhost:8080/trip/maak
 Content-Type: application/json
 
 {
-  "gebruikersnaam": "testuser",
-  "reizigers": [
-    {
-      "voornaam": "Jan",
-      "achternaam": "Jansen",
-      "geboortedatum": "1985-06-15"
-    },
-    {
-      "voornaam": "Piet",
-      "achternaam": "Pietersen",
-      "geboortedatum": "1990-11-25"
-    }
-  ],
-  "data": [
-    {
-        "categorie": "accommodatie",
-        "provider": "bookingcom",
-        "hotel": "Grand Hotel",
-        "adres": "123 Hotelstraat, Amsterdam",
-        "aantalNachten": 3
-      },
-    {
-      "categorie": "activiteiten",
-      "provider": "rijksmuseum",
-      "naam": "Rijksmuseum",
-      "datum": "2023-10-01"
-    }
-
-  ]
-}
-###
-
-
-
-
-POST http://localhost:8080/trip/maak
-Content-Type: application/json
-
-{
-  "gebruikersnaam": "testuser",
+  "gebruikersnaam": "JJ",
   "reizigers": [
     {
       "voornaam": "Jan",

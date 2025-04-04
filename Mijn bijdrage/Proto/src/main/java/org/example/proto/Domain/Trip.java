@@ -17,15 +17,12 @@ public class Trip {
         private List<Reiziger> reizigers;
         private List<BouwSteen> bouwStenen;
 
-        public Trip() {
+        public Trip(String gebruikersnaam) {
+                this.gebruikersnaam = gebruikersnaam;
                 this.reizigers = new ArrayList<>();
                 this.bouwStenen = new ArrayList<>();
         }
 
-        public Trip(String gebruikersnaam) {
-                this();
-                this.gebruikersnaam = gebruikersnaam;
-        }
 
         // Getters and Setters
         public ObjectId getId() {

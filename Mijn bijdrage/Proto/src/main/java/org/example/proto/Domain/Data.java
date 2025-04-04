@@ -4,16 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
 public class Data extends HashMap<String, Object> {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    public Data() {
-        super();
-    }
 
     public Data(JsonNode jsonNode) {
         super();
@@ -24,7 +18,7 @@ public class Data extends HashMap<String, Object> {
         }
     }
 
-    // AI Hulpmethode om waarden recursief uit te pakken
+    // AI Hulpmethode om waarden recursief uit te pakken en netjes op te slaan in db
     private Object getValueFromNode(JsonNode node) {
         if (node.isTextual()) {
             return node.asText();
@@ -44,15 +38,6 @@ public class Data extends HashMap<String, Object> {
             return map;
         } else {
             return null;
-        }
-    }
-
-    public String toJsonString() {
-        try {
-            return objectMapper.writeValueAsString(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "{}";
         }
     }
 }

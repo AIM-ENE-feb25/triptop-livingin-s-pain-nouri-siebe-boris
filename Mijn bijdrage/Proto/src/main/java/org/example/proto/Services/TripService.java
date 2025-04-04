@@ -17,7 +17,8 @@ public class TripService {
 
 
     public Trip maakTrip(TripRequest aanvraag) {
-        Trip trip = new Trip();
+        String gebruikersnaam = aanvraag.gebruikersnaam();
+        Trip trip = new Trip(gebruikersnaam);
         Status status = Status.GEPLAND;
         List<BouwSteen> bouwSteenList = new ArrayList<>();
 

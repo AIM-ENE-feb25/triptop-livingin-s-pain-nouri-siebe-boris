@@ -9,6 +9,6 @@ import java.util.Map;
 public record TripRequest(
         @JsonProperty("gebruikersnaam") String gebruikersnaam,
         @JsonProperty("reizigers") List<Reiziger> reizigers,
-        @JsonProperty("bouwstenen") Map<String, List<JsonNode>> bouwstenen // Map instead of List
+        @JsonProperty("bouwstenen") Map<String, List<JsonNode>> bouwstenen
 ) {}
 
