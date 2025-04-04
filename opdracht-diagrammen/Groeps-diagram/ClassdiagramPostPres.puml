@@ -1,5 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
+
+title Class Diagram aanpassing na presentatie
 skinparam linetype ortho
 
 class TripController {
