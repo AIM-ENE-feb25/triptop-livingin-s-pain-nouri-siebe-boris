@@ -24,10 +24,10 @@ activate Trip
 
 Service -> Trip: addReizigers(tripRequest.reizigers)
 
-loop for each entry in tripRequest.bouwstenen
+loop voor elke entry in tripRequest.bouwstenen
 
 
-    loop for each JsonNode in category list
+    loop voor elke JsonNode in categorie
         Service -> Data: new Data(jsonNode)
         activate Data
         Data --> Service: data object

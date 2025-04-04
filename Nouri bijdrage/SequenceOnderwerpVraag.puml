@@ -10,22 +10,16 @@ actor reiziger
     Container_Boundary(cb, "Backend")
         Component(tripcontroller, "TripController", "Spring Boot Controller", "Ontvangt HTTP-verzoeken en verwerkt reisboekingen")
         Component(tripservice, "TripService", "Spring Boot Service", "Regelt de volledige afhandeling van boekingen en betalingen")
-        Component(stayadapter, "OvernachtingAdapter", "Spring Boot Adapter", "Regelt accommodaties bij boekingsplatformen")
         Component(triprepository, "TripRepository", "Spring Boot Repository", "Slaat boekingsgegevens op in de database")
 
 Boundary_End()
 
-System_Ext(stay, "Accommodatie API (Booking.com, Airbnb)", "Ontvangt reserveringen voor accommodaties")
 ComponentDb(db, "Database", "Slaat reis- en betalingsgegevens op")
 
-reiziger -> webApp: Boekt een reis
-webApp -> tripcontroller: Stuurt boekingsverzoek
-tripcontroller -> tripservice: Handelt boeking af
+reiziger -> webApp: plant een trip
+webApp -> tripcontroller: Stuurt TripRequest
+tripcontroller -> tripservice: maakt een trip aan
 tripservice -> triprepository: slaat trip op
 triprepository -> db: Beheert opslag in database
-tripservice -> flightadapter: Boekt vlucht
-tripservice -> stayadapter: Boekt accommodatie
-tripcontroller -> webApp: Bevestiging van de reis
-webApp -> reiziger: Toont boekingsbevestiging
 
 @enduml

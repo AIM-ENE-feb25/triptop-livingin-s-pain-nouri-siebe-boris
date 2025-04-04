@@ -72,14 +72,14 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
     - **Repository**: De `TripRepository` is verantwoordelijk voor de opslag en het ophalen van gegevens vanuit de database (in dit geval een MongoDB-repository).
 
 2. **Aggregation:**
-    - De `Trip` klasse is een voorbeeld van een **aggregate** in de Domain-Driven Design (DDD) benadering. Een `Trip` bestaat uit verschillende `BouwSteen` en `Reiziger` objecten, wat het een rijke, samengestelde entiteit maakt die verantwoordelijk is voor de integriteit van de onderliggende data.
+    - De `Trip` klasse is een voorbeeld van een **aggregate** in de Domain-Driven Design (DDD) benadering. Een `Trip` bestaat uit verschillende `BouwSteen` en `Reiziger` objecten, wat het een rijke, samengestelde entiteit.
 
 3. **Interface en Adapter Pattern:**
     - Het **Adapter patroon** wordt toegepast via de `Adapter` interface en de concrete `BoekingsAdapter` klasse. Dit patroon maakt het mogelijk om verschillende boekingssystemen te integreren zonder de kernlogica te verstoren.
     - De interface zorgt ervoor dat er verschillende implementaties mogelijk zijn, die de specifieke logica van het boeken, annuleren en wijzigen van een reis kunnen afhandelen, afhankelijk van de provider.
 
 4. **Encapsulatie en Data Objecten:**
-    - Het gebruik van een **Data** object dat verantwoordelijk is voor het omgaan met JSON-data zorgt voor een duidelijke scheiding van de gegevensverwerking. De `Data` klasse biedt methoden om JSON te parsen en terug te sturen als een string, en heeft logica voor het extraheren van waarden uit JSON-objecten.
+    - Het gebruik van een **Data** object dat verantwoordelijk is voor het omgaan met JSON-data zorgt voor een duidelijke scheiding van de gegevensverwerking. De `Data` klasse biedt de logica voor het extraheren van waarden uit JSON-objecten.
 
 5. **Single Responsibility Principle (SRP):**
     - Elke klasse heeft één enkele verantwoordelijkheid, bijvoorbeeld `TripController` voor het afhandelen van gebruikersverzoeken, `TripService` voor de bedrijfslogica, en `BouwSteen` voor het beheren van de status en gegevens van een reiscomponent. Dit maakt de code gemakkelijker te onderhouden en uit te breiden.
@@ -102,7 +102,6 @@ De applicatie bevat componenten zoals de **inlogpagina** (loginPage), **homepagi
 
 Externe systemen worden geïntegreerd via **API's** voor verschillende diensten: de **Google Maps API** voor geolocatie-informatie, de **Open Weather API** voor weersinformatie, de **NS API** voor treinreis- en OV-informatie, de **overnachting API** voor het boeken van accommodaties, en de **vlucht API** voor vluchten. Daarnaast is er een **identity provider API** die de inloggegevens van gebruikers controleert.
 
-De applicatie maakt gebruik van verschillende navigatie- en structurele componenten zoals de **router** (router), de **navigatiebalk** (navbar), en de **voettekst** (footer), die zorgen voor een logische navigatie en lay-out van de applicatie. Alle onderdelen worden binnen de frontend geconnecteerd en ondersteunen elkaar voor een naadloze gebruikerservaring.
 
 Gebruikers kunnen de applicatie zowel als **reiziger** als **reisagent** gebruiken, waarbij de **reiziger** de functionaliteiten voor het plannen van een reis en het boeken van verschillende reiscomponenten kan gebruiken, terwijl de **reisagent** toegang heeft tot een dashboard voor het beheren van reisaanvragen van klanten. De applicatie biedt een uitgebreide set van interacties en is goed verbonden met de backend en externe systemen voor een complete reiservaring.
 
@@ -153,15 +152,20 @@ Het diagram toont de communicatie tussen de reiziger, de webapplicatie en de ide
 #### 7.4.1 Statische vs Dynamische data-structuur
 
 Ik begon met de volgende ontwerpvraag: Hoe maak je de applicatie uitbreidbaar met nieuwe bouwstenen? Hierbij had ik in eerste instantie gedacht aan een Factory Pattern. Dit is een veelgebruikte ontwerppatroon dat het mogelijk maakt om objecten te maken zonder dat de client hoeft te weten hoe deze objecten zijn gemaakt. Dit maakt de applicatie uitbreidbaar, omdat nieuwe bouwstenen eenvoudig kunnen worden toegevoegd zonder dat de bestaande code hoeft te worden gewijzigd.
-Uiteindelijk heb ik de een andere vraag gekregen en dat is data-structuur voor verschillende providers (Dynamisch vs Statische). Ik heb hiervoor een ADR opgesteld en een prototype uitgewerkt. Dit prototype is een proof of concept en is niet bedoeld om in productie te worden genomen. Het doel van het prototype is om de haalbaarheid van de oplossing te testen en om te zien of het werkt zoals verwacht. Het prototype is ontwikkeld met behulp van Java en Spring Boot, en maakt gebruik van een NoSQL-database (MongoDB) om de gegevens op te slaan.
+Uiteindelijk heb ik de een andere vraag gekregen en dat is hoe kan je data opslaan voor verschillende providers (Dynamisch vs Statische). Ik heb hiervoor een ADR opgesteld en een prototype uitgewerkt. Dit prototype is een proof of concept. Het doel van het prototype is om de haalbaarheid van de oplossing te testen en om te zien of het werkt zoals verwacht. Het prototype is ontwikkeld met behulp van Java en Spring Boot, en maakt gebruik van een NoSQL-database (MongoDB) om de gegevens op te slaan.
+
+![Component Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/Component_Onderwerpvraag_Nouri.png)
+
 
 Hier onder het class diagram van de applicatie met de vraag uitgewerkt om dynamisch te zijn. Dit betekent dat de applicatie in staat is om gegevens van verschillende aanbieders op te slaan en te verwerken zonder dat hiervoor extra code hoeft te worden geschreven. Dit wordt bereikt door gebruik te maken van een generiek data-object wat direct JSON opslaat.
 ![Class Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ClassdiagramPostProto.png)
 
 Sequence diagram:
+![Sequence Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/SequenceOnderwerpVraagNouri.png)
+
+
+Op code niveau:
 ![Sequence Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ProtoSequenceDiagram-Een_trip_aanmaken_met_vrschilende_bouwstenen___TripTop.png)
-
-
 
 ## 8. Architectural Decision Records
 1. [ADR-01: Indeling Webapplicaties](./ADR-01.md)
@@ -196,9 +200,6 @@ mvn -version
 ```
 Als Maven nog niet is geïnstalleerd:
 - Download Maven van [maven.apache.org](https://maven.apache.org/download.cgi)
-- Pak het bestand uit in een map naar keuze
-- Stel de M2_HOME omgevingsvariabele in naar deze map
-- Voeg %M2_HOME%\bin (Windows) of $M2_HOME/bin (Unix/Linux) toe aan je PATH
 
 ### 3. Project verkrijgen
 - Download de ZIP of kloon de repository:

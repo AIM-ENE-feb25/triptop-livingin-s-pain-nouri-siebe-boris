@@ -5,7 +5,7 @@
 
 ### Voorbereiding
 
-[Uitwerking gedeelte concept diagram](../../opdracht-diagrammen/component-backend.puml)
+[Uitwerking gedeelte concept diagram](../../opdracht-diagrammen/Groeps-diagram/component-backend.puml)
 
 ### Componenten
 
