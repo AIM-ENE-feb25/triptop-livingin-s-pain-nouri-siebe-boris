@@ -1,24 +1,2 @@
-POST http://localhost:8080/trips/maak
-Content-Type: application/json
+GET http://localhost:8080/trips/bekijk/123
 
-{
-  "reizigers": [
-    {
-      "voornaam": "Jan",
-      "achternaam": "Jansen",
-      "geboortedatum": "1985-06-15"
-    },
-    {
-      "voornaam": "Piet",
-      "achternaam": "Pietersen",
-      "geboortedatum": "1990-11-25"
-    }
-  ],
-  "data": [
-    {
-      "hotelNaam": "Grand Hotel",
-      "adres": "123 Hotelstraat, Amsterdam",
-      "aantalNachten": 3
-    }
-  ]
-}

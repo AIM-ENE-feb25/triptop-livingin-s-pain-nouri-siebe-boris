@@ -17,7 +17,7 @@ public class TripService {
     private final TripRepository tripRepository;
 
     @Autowired
-    @Qualifier("airbnbAdapter")
+    @Qualifier("hotelscomAdapter")
     private VerblijfAdapter airbnbAdapter;
 
     @Autowired
