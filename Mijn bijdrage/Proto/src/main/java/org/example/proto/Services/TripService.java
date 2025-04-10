@@ -1,5 +1,6 @@
 package org.example.proto.Services;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.example.proto.Adapters.VerblijfAdapter;
 import org.example.proto.Domain.BouwSteen;
 import org.example.proto.Domain.Data;
@@ -18,7 +19,7 @@ public class TripService {
 
     @Autowired
     @Qualifier("hotelscomAdapter")
-    private VerblijfAdapter airbnbAdapter;
+    private VerblijfAdapter hotelscomAdapter;
 
     @Autowired
     @Qualifier("bookingcomAdapter")
@@ -70,23 +71,76 @@ public class TripService {
     }
 
     public Trip updateTrip(int tripid) {
-//        Trip trip = tripRepository.findById(String.valueOf(tripid)).get();
-//        List<BouwSteen> bouwStenen = trip.getBouwStenen();
-//        for (BouwSteen bouwSteen : bouwStenen) {
-//            Data data = bouwSteen.getData();
-//                switch (data.haalJsonNodeOp().findValues("provider").get(0).asText()) {
-//                    case "airbnb":
-//                        bouwSteen.setData(airbnbAdapter.updateVerblijf(bouwSteen.getData()));
-//                        break;
-//                    case "bookingcom":
-//                        bouwSteen.setData(bookingcomAdapter.updateVerblijf(bouwSteen.getData()));
-//                        break;
-//                }
-//            }
-//        return null;
+        // Maak een mock van de data die je zou ontvangen (deze kan vervangen worden door echte data)
+        Data mockData = new Data("{\n" +
+                "  \"gebruikersnaam\": \"JJ\",\n" +
+                "  \"reizigers\": [\n" +
+                "    {\n" +
+                "      \"voornaam\": \"Jan\",\n" +
+                "      \"achternaam\": \"Jansen\",\n" +
+                "      \"geboortedatum\": \"1985-06-15\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"voornaam\": \"Piet\",\n" +
+                "      \"achternaam\": \"Pietersen\",\n" +
+                "      \"geboortedatum\": \"1990-11-25\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"bouwstenen\": {\n" +
+                "    \"accommodatie\": [\n" +
+                "      {\n" +
+                "        \"provider\": \"bookingcom\",\n" +
+                "        \"data\": [\n" +
+                "          {\n" +
+                "            \"hotel\": \"Grand Hotel\",\n" +
+                "            \"id\": 340569,\n" +
+                "            \"adres\": \"123 Hotelstraat, Amsterdam\",\n" +
+                "            \"aantalNachten\": 3,\n" +
+                "            \"checkin\": \"2025-05-01\",\n" +
+                "            \"checkout\": \"2025-05-05\"\n" +
+                "          }\n" +
+                "        ]\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"provider\": \"hotelscom\",\n" +
+                "        \"data\": [\n" +
+                "          {\n" +
+                "            \"hotel\": \"Cozy Loft\",\n" +
+                "            \"id\": \"2621_17117062\",\n" +
+                "            \"adres\": \"789 Grachtenstraat, Utrecht\",\n" +
+                "            \"aantalNachten\": 4, \n" +
+                "            \"checkin\": \"2025-05-01\",\n" +
+                "            \"checkout\": \"2025-05-05\"\n" +
+                "          }\n" +
+                "        ]\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  }\n" +
+                "}");
 
-        Data mockData = new Data("{\"id\": 123 }");
-        bookingcomAdapter.updateVerblijf(mockData);
-       return new Trip();
+        JsonNode bouwstenen = mockData.haalJsonNodeOp().path("bouwstenen").path("accommodatie");
+
+        for (JsonNode bouwSteen : bouwstenen) {
+            String provider = bouwSteen.path("provider").asText();
+
+            switch (provider) {
+                case "bookingcom":
+                    JsonNode bookingComData = bouwSteen.path("data");
+                    Data bookingComDataObject = new Data(bookingComData.toString());
+                    bookingcomAdapter.updateVerblijf(bookingComDataObject);
+                    break;
+
+                case "hotelscom":
+                    JsonNode hotelComData = bouwSteen.path("data");
+                    Data hotelComDataObject = new Data(hotelComData.toString());
+                    hotelscomAdapter.updateVerblijf(hotelComDataObject);
+                    break;
+
+            }
+        }
+
+
+        return new Trip();
     }
+
 }

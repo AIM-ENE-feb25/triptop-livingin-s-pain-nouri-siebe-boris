@@ -6,7 +6,6 @@ import com.mashape.unirest.http.Unirest;
 import org.example.proto.Domain.Data;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Component
 public class bookingcomAdapter implements VerblijfAdapter {
@@ -14,13 +13,19 @@ public class bookingcomAdapter implements VerblijfAdapter {
     @Override
     public Data updateVerblijf(Data data) {
         int id = data.haalJsonNodeOp().findValue("id").asInt();
+        String checkinDate = data.haalJsonNodeOp().findValue("checkin").asText();
+        String checkoutDate = data.haalJsonNodeOp().findValue("checkout").asText();
+
         System.out.println("Booking.com adapter: Verblijf met id " + id + " geüpdatet");
+        System.out.println("Check-in datum: " + checkinDate);
+        System.out.println("Check-out datum: " + checkoutDate);
 
         try {
-            HttpResponse<JsonNode> response = Unirest.get("https://booking-com.p.rapidapi.com/v2/hotels/details?checkout_date=2025-09-27&hotel_id=1676161&currency=EUR&checkin_date=2025-09-25&locale=nl")
+            HttpResponse<JsonNode> response = Unirest.get("https://booking-com.p.rapidapi.com/v2/hotels/details?checkout_date=" + checkoutDate + "&hotel_id=" + id + "&currency=EUR&checkin_date=" + checkinDate + "&locale=nl")
                     .header("x-rapidapi-key", "9dbe3ee3bamsh052139ccacb2791p11e045jsn88ed14469705")
                     .header("x-rapidapi-host", "booking-com.p.rapidapi.com")
                     .asJson();
+
 
             JsonNode responseBody = response.getBody();
             com.fasterxml.jackson.databind.JsonNode root = new ObjectMapper().readTree(responseBody.toString());
