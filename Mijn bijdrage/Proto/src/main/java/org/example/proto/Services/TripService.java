@@ -18,8 +18,8 @@ public class TripService {
     private final TripRepository tripRepository;
 
     @Autowired
-    @Qualifier("hotelscomAdapter")
-    private VerblijfAdapter hotelscomAdapter;
+    @Qualifier("airbnbAdapter")
+    private VerblijfAdapter AirbnbAdapter;
 
     @Autowired
     @Qualifier("bookingcomAdapter")
@@ -102,11 +102,11 @@ public class TripService {
                 "        ]\n" +
                 "      },\n" +
                 "      {\n" +
-                "        \"provider\": \"hotelscom\",\n" +
+                "        \"provider\": \"airbnb\",\n" +
                 "        \"data\": [\n" +
                 "          {\n" +
                 "            \"hotel\": \"Cozy Loft\",\n" +
-                "            \"id\": \"2621_17117062\",\n" +
+                "            \"id\": 688944472215518175,\n" +
                 "            \"adres\": \"789 Grachtenstraat, Utrecht\",\n" +
                 "            \"aantalNachten\": 4, \n" +
                 "            \"checkin\": \"2025-05-01\",\n" +
@@ -130,10 +130,10 @@ public class TripService {
                     bookingcomAdapter.updateVerblijf(bookingComDataObject);
                     break;
 
-                case "hotelscom":
+                case "airbnb":
                     JsonNode hotelComData = bouwSteen.path("data");
                     Data hotelComDataObject = new Data(hotelComData.toString());
-                    hotelscomAdapter.updateVerblijf(hotelComDataObject);
+                    AirbnbAdapter.updateVerblijf(hotelComDataObject);
                     break;
 
             }
