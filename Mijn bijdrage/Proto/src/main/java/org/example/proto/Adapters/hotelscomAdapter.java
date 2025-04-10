@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class hotelscomAdapter implements VerblijfAdapter {
 
     @Override
-    public Data updateVerblijf(Data data, int aantalReizigers) {
+    public Data updateVerblijf(Data data) {
         HttpResponse<String> response = Unirest.get("https://hotels-com6.p.rapidapi.com/hotels/details-offers?propertyId=2621_17117062&checkinDate=2025-04-11&checkoutDate=2025-04-18")
                 .header("x-rapidapi-key", "9dbe3ee3bamsh052139ccacb2791p11e045jsn88ed14469705")
                 .header("x-rapidapi-host", "hotels-com6.p.rapidapi.com")

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class bookingcomAdapter implements VerblijfAdapter {
 
     @Override
-    public Data updateVerblijf(Data data, int aantalReizigers) {
+    public Data updateVerblijf(Data data) {
         int id = data.haalJsonNodeOp().findValue("id").asInt();
         System.out.println("Booking.com adapter: Verblijf met id " + id + " geüpdatet");
 
@@ -25,7 +25,7 @@ public class bookingcomAdapter implements VerblijfAdapter {
             JsonNode responseBody = response.getBody();
             com.fasterxml.jackson.databind.JsonNode root = new ObjectMapper().readTree(responseBody.toString());
 
-            // Navigeren naar block[0].product_price_breakdown.all_inclusive_amount_hotel_currency.value
+
             com.fasterxml.jackson.databind.JsonNode blockArray = root.get("block");
             if (blockArray != null && blockArray.isArray() && blockArray.size() > 0) {
                 com.fasterxml.jackson.databind.JsonNode firstBlock = blockArray.get(0);

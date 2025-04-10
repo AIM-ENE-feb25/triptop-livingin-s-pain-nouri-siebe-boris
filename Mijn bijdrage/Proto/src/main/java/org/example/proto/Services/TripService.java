@@ -86,7 +86,7 @@ public class TripService {
 //        return null;
 
         Data mockData = new Data("{\"id\": 123 }");
-        bookingcomAdapter.updateVerblijf(mockData, 2);
+        bookingcomAdapter.updateVerblijf(mockData);
        return new Trip();
     }
 }
