@@ -4,17 +4,15 @@ title Eerste class Diagram
 skinparam linetype ortho
 
 class TripController {
-    +maakTrip(request: TripRequestDTO) : Trip
-    +boekTrip(request: tripId) : void
+    +createTrip(request: TripRequestDTO) : Trip
+    +bookTrip(request: tripId) : void
     +wijzigTrip(request: tripId) : void
-    +updateTrip(request: tripId) : void
     +deleteTrip(request: tripId) : void
 }
 
 class TripService {
-    +maakTrip(request: TripRequestDTO) : Trip
-    +boekTrip(request: tripId) : void
-    +wijzigTrip(request: tripId) : void
+    +createTrip(request: TripRequestDTO) : Trip
+    +bookTrip(request: tripId) : void
     +updateTrip(request: tripId) : void
     +deleteTrip(request: tripId) : void
 
@@ -66,11 +64,10 @@ class BouwSteen {
 }
 
 enum Status {
-    GEPLAND
-    GEREGELD
-    BETAALD
-    NIET UITVOERBAAR
-    UITGEVOERD
+    AVAILABLE
+    UNAVAILABLE
+    IN_PROGRESS
+    FINISHED
 }
 
 }
@@ -83,17 +80,17 @@ class StayData implements Data {
  getInfo() : String
 }
 
-interface VerblijfAdapter {
-    +updateVerblijf(data: Data) : Data
+interface Adapter {
+    +book(data: Data) : void
+    +cancel(data: Data) : void
+    +update(data: Data) : void
 }
 
 
-class bookingcomAdapter implements VerblijfAdapter {
-    +updateVerblijf(data: Data) : Data
-}
-
-class airbnbAdapter implements VerblijfAdapter {
-    +updateVerblijf(data: Data) : Data
+class BookingAdapter implements Adapter {
+    +book(data: Data) : void
+    +cancel(data: Data) : void
+    +update(data: Data) : void
 }
 
 
@@ -110,7 +107,7 @@ TripService "1" -- "1" TripRepository
 TripController "1" -- "*" TripRequestDTO
 
 TripService "1" -- "*" Trip
-TripService "1" -- "*" VerblijfAdapter
+TripService "1" -- "*" Adapter
 
 
 BouwSteen "1" -- "1" Data

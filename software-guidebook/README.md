@@ -75,7 +75,7 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
     - De `Trip` klasse is een voorbeeld van een **aggregate** in de Domain-Driven Design (DDD) benadering. Een `Trip` bestaat uit verschillende `BouwSteen` en `Reiziger` objecten, wat het een rijke, samengestelde entiteit.
 
 3. **Interface en Adapter Pattern:**
-    - Het **Adapter patroon** wordt toegepast via de `Adapter` interface en de concrete `VerblijfAdapter` klasse. Dit patroon maakt het mogelijk om verschillende boekingssystemen te integreren zonder de kernlogica te verstoren.
+    - Het **Adapter patroon** wordt toegepast via de `Adapter` interface en de concrete `BoekingsAdapter` klasse. Dit patroon maakt het mogelijk om verschillende boekingssystemen te integreren zonder de kernlogica te verstoren.
     - De interface zorgt ervoor dat er verschillende implementaties mogelijk zijn, die de specifieke logica van het boeken, annuleren en wijzigen van een reis kunnen afhandelen, afhankelijk van de provider.
 
 4. **Encapsulatie en Data Objecten:**
@@ -110,7 +110,7 @@ Gebruikers kunnen de applicatie zowel als **reiziger** als **reisagent** gebruik
 #### Backend component diagram:
 ![Component Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ComponentDiagramBack.png)
 
-Dit diagram toont de architectuur van TripTop, opgebouwd uit verschillende componenten. De applicatie bestaat uit een frontend, een webapplicatie gebouwd met React.js, en een backend, die is opgezet met Spring Boot. De frontend en backend communiceren met elkaar via HTTP/REST API-aanroepen.
+Dit diagram toontt de architectuur van TripTop, opgebouwd uit verschillende componenten. De applicatie bestaat uit een frontend, een webapplicatie gebouwd met React.js, en een backend, die is opgezet met Spring Boot. De frontend en backend communiceren met elkaar via HTTP/REST API-aanroepen.
 
 De backend bevat meerdere componenten, waaronder controllers (zoals loginController en tripController) die HTTP-aanvragen ontvangen van de frontend, en services (zoals loginService en tripService) die de logica voor authenticatie en reisbeheer afhandelen. Daarnaast maakt de backend gebruik van adapters (zoals loginAdapter, flightAdapter, trainAdapter, stayAdapter, paymentAdapter) om te communiceren met externe systemen voor vluchten, treinen, overnachtingen en betalingen. De tripRepository zorgt voor de opslag en het ophalen van reisgegevens uit een database, waarmee CRUD-operaties worden uitgevoerd.
 
