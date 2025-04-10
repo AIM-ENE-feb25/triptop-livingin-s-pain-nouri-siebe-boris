@@ -20,10 +20,10 @@ Container_Boundary(cb, "Backend") {
     Component(loginservice, "loginService", "Spring Boot service")
     Component(tripservice, "tripService", "Spring Boot service")
     Component(loginadapter, "loginAdapter", "Spring Boot adapter")
-    Component(flightadapter, "flightAdapter", "Spring Boot adapter")
-    Component(trainadapter, "trainAdapter", "Spring Boot adapter")
-    Component(stayadapter, "stayAdapter", "Spring Boot adapter")
-    Component(paymentadapter, "paymentAdapter", "Spring Boot adapter")
+    Component(flightadapter, "VluchtAdapter", "Spring Boot adapter")
+    Component(trainadapter, "TreinAdapter", "Spring Boot adapter")
+    Component(stayadapter, "VerblijfAdapter", "Spring Boot adapter")
+    Component(paymentadapter, "BetalingsAdapter", "Spring Boot adapter")
     Component(triprepository, "tripRepository", "Spring Boot repository")
 }
 
