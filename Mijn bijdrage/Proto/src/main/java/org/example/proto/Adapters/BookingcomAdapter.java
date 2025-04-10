@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
-public class bookingcomAdapter implements VerblijfAdapter {
+public class BookingcomAdapter implements VerblijfAdapter {
 
     @Override
     public Data updateVerblijf(Data data) {

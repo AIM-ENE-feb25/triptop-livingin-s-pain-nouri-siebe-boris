@@ -22,7 +22,7 @@ public class TripService {
     private VerblijfAdapter AirbnbAdapter;
 
     @Autowired
-    @Qualifier("bookingcomAdapter")
+    @Qualifier("BookingcomAdapter")
     private VerblijfAdapter bookingcomAdapter;
 
     public TripService(TripRepository tripRepository) {
