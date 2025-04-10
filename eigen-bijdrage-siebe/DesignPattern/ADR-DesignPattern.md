@@ -1,6 +1,6 @@
 # 1. Design Patten ADR
 
-**Datum:** 28-03-2025
+**Datum:** 10-04-2025
 
 ## Status
 
@@ -23,6 +23,12 @@ Aan de andere kant brengt het Adapter Pattern extra onderhoud met zich mee, omda
 
 ## Decision
 
+De keuze voor onze designpattern van Adapter pattern om meerdere verschillende boekingsservices in de applicatie toe te voegen is de keuze geworden.
 
 ## Consequences
+
+- **Schaalbaarheid:** Nieuwe boekingsservices kunnen gemakkelijk worden toegevoegd door een nieuwe adapter te schrijven die de verblijfsadapter implementeerd, zonder impact te hebben op bestaande functionaliteit.
+- **Onderhoudbaarheid:** Wijzigingen aan de externe API’s hebben alleen aanpassingen nodig in de bijbehorende adapter, wat zorgt voor minder werk om dit aan te passen.
+- **Complexiteit:** De toevoeging van meerdere adapters verhoogt de complexiteit van de code enigszins. Goede documentatie en duidelijke naamgeving zijn essentieel om het overzicht te behouden.
+
 
