@@ -22,8 +22,8 @@ public class TripService {
     private VerblijfAdapter AirbnbAdapter;
 
     @Autowired
-    @Qualifier("BookingcomAdapter")
-    private VerblijfAdapter bookingcomAdapter;
+    @Qualifier("bookingcomAdapter")
+    private VerblijfAdapter BookingcomAdapter;
 
     public TripService(TripRepository tripRepository) {
         this.tripRepository = tripRepository;
@@ -106,11 +106,11 @@ public class TripService {
                 "        \"data\": [\n" +
                 "          {\n" +
                 "            \"hotel\": \"Cozy Loft\",\n" +
-                "            \"id\": 688944472215518175,\n" +
+                "            \"hotelid\": 688944472215518175,\n" +
                 "            \"adres\": \"789 Grachtenstraat, Utrecht\",\n" +
                 "            \"aantalNachten\": 4, \n" +
-                "            \"checkin\": \"2025-05-01\",\n" +
-                "            \"checkout\": \"2025-05-05\"\n" +
+                "            \"checkin\": \"2025-04-14\",\n" +
+                "            \"checkout\": \"2025-04-21\"\n" +
                 "          }\n" +
                 "        ]\n" +
                 "      }\n" +
@@ -126,14 +126,16 @@ public class TripService {
             switch (provider) {
                 case "bookingcom":
                     JsonNode bookingComData = bouwSteen.path("data");
+                    System.out.println(bookingComData.toString());
                     Data bookingComDataObject = new Data(bookingComData.toString());
-                    bookingcomAdapter.updateVerblijf(bookingComDataObject);
+                    BookingcomAdapter.updateVerblijf(bookingComDataObject);
                     break;
 
                 case "airbnb":
-                    JsonNode hotelComData = bouwSteen.path("data");
-                    Data hotelComDataObject = new Data(hotelComData.toString());
-                    AirbnbAdapter.updateVerblijf(hotelComDataObject);
+                    JsonNode airbnbData = bouwSteen.path("data");
+                    System.out.println(airbnbData.toString());
+                    Data airbnbDataObject = new Data(airbnbData.toString());
+                    AirbnbAdapter.updateVerblijf(airbnbDataObject);
                     break;
 
             }

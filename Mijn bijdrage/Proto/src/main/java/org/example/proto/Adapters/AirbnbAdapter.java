@@ -12,7 +12,9 @@ public class AirbnbAdapter implements VerblijfAdapter {
 
     @Override
     public Data updateVerblijf(Data data) {
-        int id = data.haalJsonNodeOp().findValue("id").asInt();
+        String id = data.haalJsonNodeOp().findValue("hotelid").asText();
+        System.out.println(id);
+        System.out.println(data.haalJsonNodeOp().toString());
         String checkinDate = data.haalJsonNodeOp().findValue("checkin").asText();
         String checkoutDate = data.haalJsonNodeOp().findValue("checkout").asText();
 

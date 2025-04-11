@@ -16,7 +16,7 @@ public class BookingcomAdapter implements VerblijfAdapter {
         String checkinDate = data.haalJsonNodeOp().findValue("checkin").asText();
         String checkoutDate = data.haalJsonNodeOp().findValue("checkout").asText();
 
-        System.out.println("Booking.com adapter: Verblijf met id " + id + " geüpdatet");
+        System.out.println("Airbnb adapter: Verblijf met id " + id + " geüpdatet");
         System.out.println("Check-in datum: " + checkinDate);
         System.out.println("Check-out datum: " + checkoutDate);
 
