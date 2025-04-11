@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class BookingcomAdapter implements VerblijfAdapter {
 
     @Override
-    public Data updateVerblijf(Data data) {
+    public Data boekVerblijf(Data data) {
         int id = data.haalJsonNodeOp().findValue("id").asInt();
         String checkinDate = data.haalJsonNodeOp().findValue("checkin").asText();
         String checkoutDate = data.haalJsonNodeOp().findValue("checkout").asText();

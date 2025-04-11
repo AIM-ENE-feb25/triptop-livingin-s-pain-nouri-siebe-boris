@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class AirbnbAdapter implements VerblijfAdapter {
 
     @Override
-    public Data updateVerblijf(Data data) {
+    public Data boekVerblijf(Data data) {
         String id = data.haalJsonNodeOp().findValue("id").asText();
         System.out.println(id);
         System.out.println(data.haalJsonNodeOp().toString());

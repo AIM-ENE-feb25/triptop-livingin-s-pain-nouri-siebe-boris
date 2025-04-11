@@ -6,6 +6,6 @@ import org.example.proto.Domain.Trip;
 
 public interface VerblijfAdapter {
 
-    Data updateVerblijf(Data data);
+    Data boekVerblijf(Data data);
     
 }

@@ -128,14 +128,14 @@ public class TripService {
                     JsonNode bookingComData = bouwSteen.path("data");
                     System.out.println(bookingComData.toString());
                     Data bookingComDataObject = new Data(bookingComData.toString());
-                    BookingcomAdapter.updateVerblijf(bookingComDataObject);
+                    BookingcomAdapter.boekVerblijf(bookingComDataObject);
                     break;
 
                 case "airbnb":
                     JsonNode airbnbData = bouwSteen.path("data");
                     System.out.println(airbnbData.toString());
                     Data airbnbDataObject = new Data(airbnbData.toString());
-                    AirbnbAdapter.updateVerblijf(airbnbDataObject);
+                    AirbnbAdapter.boekVerblijf(airbnbDataObject);
                     break;
 
             }
