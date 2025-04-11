@@ -1,0 +1,36 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml
+
+title Een trip boeken met verschillende bouwstenen - TripTop
+autonumber
+
+
+participant "HTTP" as Client
+participant "TripController" as Controller
+participant "TripService" as Service
+participant "BookingcomAdapter" as BookingcomAdapter
+participant "AirbnbAdapter" as AirbnbAdapter
+participant "Data" as Data
+participant "TripRepository" as Repository
+participant "Trip" as Trip
+
+Client -> Controller: HTTP /trips/boek/tripId
+
+Controller -> Service: boekTrip(int tripId)
+
+Service -> Repository: getTrip(int tripId)
+
+Repository --> Service: Trip trip = Trip
+
+Service -> BookingcomAdapter: boekTrip(Data data)
+BookingcomAdapter --> Service: Data data
+
+Service -> AirbnbAdapter: boekTrip(Data data)
+AirbnbAdapter --> Service: Data data
+
+Service -> Repository: saveTrip(Trip trip)
+
+Service --> Controller: Trip trip
+
+Controller --> Client: HTTP STATUS 200
+@enduml
