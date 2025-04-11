@@ -1,2 +1,2 @@
-GET http://localhost:8080/trips/bekijk/123
+POST http://localhost:8080/trips/boek/123
 

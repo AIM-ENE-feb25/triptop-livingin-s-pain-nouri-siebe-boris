@@ -20,8 +20,8 @@ public class TripController {
     }
 
     @PostMapping("/boek/{tripId}")
-    public void boekTrip(@PathVariable String tripId) {
-        tripService.boekTrip(tripId);
+    public Trip boekTrip(@PathVariable String tripId) {
+        return tripService.boekTrip(tripId);
     }
 
     @PutMapping("/wijzig/{tripId}")
@@ -36,6 +36,6 @@ public class TripController {
 
     @GetMapping("/bekijk/{tripId}")
     public Trip bekijkTrip(@PathVariable String tripId) {
-        return tripService.bekijkTrip(tripId);
+        return null;
     }
 }

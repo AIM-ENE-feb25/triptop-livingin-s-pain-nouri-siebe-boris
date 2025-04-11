@@ -13,8 +13,6 @@ public class AirbnbAdapter implements VerblijfAdapter {
     @Override
     public Data boekVerblijf(Data data) {
         String id = data.haalJsonNodeOp().findValue("id").asText();
-        System.out.println(id);
-        System.out.println(data.haalJsonNodeOp().toString());
         String checkinDate = data.haalJsonNodeOp().findValue("checkin").asText();
         String checkoutDate = data.haalJsonNodeOp().findValue("checkout").asText();
 
@@ -29,8 +27,6 @@ public class AirbnbAdapter implements VerblijfAdapter {
                     .header("x-rapidapi-host", "airbnb13.p.rapidapi.com")
                     .asString();
 
-            // Log de response body om te controleren wat we terug krijgen
-            System.out.println("Response body: " + response.getBody());
 
             // Controleer of de API geen fouten heeft en er geldige resultaten zijn
             if (response.getBody().contains("error") && response.getBody().contains("source currently unavailable")) {
