@@ -15,7 +15,7 @@ TripTop communiceert met verschillende externe systemen. Vervoersaanbieders (bij
 Onderstaande contextdiagram toont de relaties tussen TripTop, zijn gebruikers en externe systemen:
 
 ![ContextDiagram](../opdracht-diagrammen/Groeps-diagram/Png's/Groeps_Context.png)
-
+API: [API_List](../Nouri bijdrage/API_LIST.md)
 ## 3. Functional Overview
 
 Om de belangrijkste features toe te lichten zijn er user stories en twee domain stories gemaakt en een overzicht van het domein in de vorm van een domeinmodel. Op deze plek staat typisch een user story map maar die ontbreekt in dit voorbeeld.
@@ -65,24 +65,21 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 * Security -> Confidentiality (Degree to which a system, product or component ensures that data are accessible only to those authorized to have access)
 
 ## 6. Principles
-1. **Laagjesarchitectuur (Layered Architecture):**
-   De software maakt gebruik van een gelaagde architectuur, waarbij de logica van de applicatie is verdeeld over verschillende lagen:
-    - **Controller**: De `TripController` zorgt voor de interactie met de gebruiker en stuurt verzoeken naar de service laag.
-    - **Service**: De `TripService` bevat de bedrijfslogica voor het beheren van reizen (zoals het aanmaken, boeken, wijzigen en verwijderen van een reis).
-    - **Repository**: De `TripRepository` is verantwoordelijk voor de opslag en het ophalen van gegevens vanuit de database (in dit geval een MongoDB-repository).
+1. Single Responsibility Principle (SRP)  
+   Elke klasse heeft één duidelijke taak. Bijvoorbeeld: TripController handelt alleen HTTP-verzoeken af, TripService bevat de bedrijfslogica, en TripRepository regelt database-interactie.
 
-2. **Aggregation:**
-    - De `Trip` klasse is een voorbeeld van een **aggregate** in de Domain-Driven Design (DDD) benadering. Een `Trip` bestaat uit verschillende `BouwSteen` en `Reiziger` objecten, wat het een rijke, samengestelde entiteit.
+2. Don't Repeat Yourself (DRY)  
+   Herhaling van logica is vermeden door herbruikbare methodes te gebruiken.
 
-3. **Interface en Adapter Pattern:**
-    - Het **Adapter patroon** wordt toegepast via de `Adapter` interface en de concrete `VerblijfAdapter` klasse. Dit patroon maakt het mogelijk om verschillende boekingssystemen te integreren zonder de kernlogica te verstoren.
-    - De interface zorgt ervoor dat er verschillende implementaties mogelijk zijn, die de specifieke logica van het boeken, annuleren en wijzigen van een reis kunnen afhandelen, afhankelijk van de provider.
+3. Keep It Simple, Stupid (KISS)  
+   De code is bewust eenvoudig en begrijpelijk gehouden, zonder onnodige complexiteit of overbodige abstracties.
 
-4. **Encapsulatie en Data Objecten:**
-    - Het gebruik van een **Data** object dat verantwoordelijk is voor het omgaan met JSON-data zorgt voor een duidelijke scheiding van de gegevensverwerking. De `Data` klasse biedt de logica voor het extraheren van waarden uit JSON-objecten.
+4. High Cohesion & Low Coupling  
+   Klassen en modules hebben een sterke interne samenhang en zo min mogelijk afhankelijkheden van elkaar. Dit maakt aanpassingen lokaal mogelijk zonder bijeffecten.
 
-5. **Single Responsibility Principle (SRP):**
-    - Elke klasse heeft één enkele verantwoordelijkheid, bijvoorbeeld `TripController` voor het afhandelen van gebruikersverzoeken, `TripService` voor de bedrijfslogica, en `BouwSteen` voor het beheren van de status en gegevens van een reiscomponent. Dit maakt de code gemakkelijker te onderhouden en uit te breiden.
+5. Encapsulatie:
+   - Het gebruik van een Data object dat verantwoordelijk is voor het omgaan met JSON-data zorgt voor een duidelijke scheiding van de gegevensverwerking. De Data klasse biedt de logica voor het extraheren van waarden uit JSON-objecten.
+
 
 ## 7. Software Architecture
 
