@@ -45,13 +45,8 @@ public class TripService {
         return tripRepository.save(trip);
     }
 
-    public void boekTrip(String tripId) {
-        Optional<Trip> optionalTrip = tripRepository.findById(tripId);
-        if (optionalTrip.isPresent()) {
-            Trip trip = optionalTrip.get();
-            // Boekingslogica hier
-            tripRepository.save(trip);
-        }
+    public Trip boekTrip(String tripId) {
+        return updateTrip(Integer.parseInt(tripId));
     }
 
     public void wijzigTrip(String tripId) {
@@ -66,8 +61,8 @@ public class TripService {
         tripRepository.deleteById(tripId);
     }
 
-    public Trip bekijkTrip(String tripId) {
-        return updateTrip(Integer.parseInt(tripId));
+    public void bekijkTrip(String tripId) {
+
     }
 
     public Trip updateTrip(int tripid) {
