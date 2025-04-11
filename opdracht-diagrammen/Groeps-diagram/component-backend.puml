@@ -34,7 +34,7 @@ together{
     System_Ext(flight, "Vlucht API (Google Flights, Skyscanner)", "Bied vluchtinformatie")
     System_Ext(payment, "Betaling Provider (Stripe, Adyen, Mollie)", "Verwerkt betalingen")
 
-    ComponentDb(db, "Database")
+    ComponentDb(db, "Database", "MongoDB NOSQL")
 
 }
 
