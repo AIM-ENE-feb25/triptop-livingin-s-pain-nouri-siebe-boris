@@ -14,7 +14,7 @@ TripTop communiceert met verschillende externe systemen. Vervoersaanbieders (bij
 
 Onderstaande contextdiagram toont de relaties tussen TripTop, zijn gebruikers en externe systemen:
 
-![ContextDiagram](../opdracht-diagrammen/Groeps-diagram/Png's/ContextDiagram.png)
+![ContextDiagram](../opdracht-diagrammen/Groeps-diagram/Png's/Groeps_Context.png)
 
 ## 3. Functional Overview
 
@@ -88,7 +88,7 @@ Voordat deze casusomschrijving tot stand kwam, heeft de opdrachtgever de volgend
 
 ###     7.1. Containers
 
-![Container Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ContainerDiagram.png)
+![Container Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/Groeps_containerdiagram.png)
 
 Het **Container Diagram** van TripTop toont de hoofdcomponenten en hun interacties. **Reizigers** plannen en boeken reizen via de **Web Applicatie (React)**, terwijl **Reisagenten** ondersteuning bieden. De **Backend (Spring Boot)** verwerkt aanvragen, beheert bedrijfslogica en communiceert met externe systemen zoals **Google Maps, Open Weather, NS API, boekings- en betalingsservices**. Gegevens worden opgeslagen in een **SQL/NoSQL database**. De backend regelt ook **authenticatie en betalingen** via externe APIs. Alles verloopt via
 
@@ -108,7 +108,7 @@ Gebruikers kunnen de applicatie zowel als **reiziger** als **reisagent** gebruik
 
 
 #### Backend component diagram:
-![Component Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ComponentDiagramBack.png)
+![Component Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/Groeps_componentdiagram.png)
 
 Dit diagram toont de architectuur van TripTop, opgebouwd uit verschillende componenten. De applicatie bestaat uit een frontend, een webapplicatie gebouwd met React.js, en een backend, die is opgezet met Spring Boot. De frontend en backend communiceren met elkaar via HTTP/REST API-aanroepen.
 
@@ -160,17 +160,21 @@ Uiteindelijk heb ik de een andere vraag gekregen en dat is hoe kan je data opsla
 Hier onder het class diagram van de applicatie met de vraag uitgewerkt om dynamisch te zijn. Dit betekent dat de applicatie in staat is om gegevens van verschillende aanbieders op te slaan en te verwerken zonder dat hiervoor extra code hoeft te worden geschreven. Dit wordt bereikt door gebruik te maken van een generiek data-object wat direct JSON opslaat.
 ![Class Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ClassdiagramPostProto.png)
 
-Sequence diagram:
+**Sequence diagram:**
+
 ![Sequence Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/SequenceOnderwerpVraagNouri.png)
 
 
-Op code niveau:
+**Op code niveau:**
+
 ![Sequence Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ProtoSequenceDiagram-Een_trip_aanmaken_met_vrschilende_bouwstenen___TripTop.png)
 
+#### 7.4.2 Booking adapter
+
 ## 8. Architectural Decision Records
-1. [ADR-01: Indeling Webapplicaties](./ADR-01.md)
-2. [ADR-02: Communicatie Betaling Provider](./ADR-02.md)
-3. [ADR-03: Data-structuur voor verschillende providers (Dynamisch vs Statische)](./ADR-03.md)
+1. [ADR-01: Indeling Webapplicaties](/Users/nouri/Documents/GitHub/triptop-livingin-s-pain-nouri-siebe-boris/Nouri bijdrage/ADR-01.md)
+2. [ADR-02: Communicatie Betaling Provider](/Users/nouri/Documents/GitHub/triptop-livingin-s-pain-nouri-siebe-boris/Nouri bijdrage/ADR-02.md)
+3. [ADR-03: Data-structuur voor verschillende providers (Dynamisch vs Statische)](/Users/nouri/Documents/GitHub/triptop-livingin-s-pain-nouri-siebe-boris/Nouri bijdrage/ADR-03.md)
 4. [ADR-04: Factory pattern](./ADR-02.md)
 
 ## 9. Deployment, Operation and Support

@@ -38,33 +38,27 @@ together{
 System_Ext(identityApi, "Identity Provider API (WireMock)", "Simuleert identity provider")
 System_Ext(betalingApi, "Betaling API (?)", "Voor het verwerken van betalingen")
 }
-' TripTop Systeem
 System_Boundary(tripTopSystem, "TripTop"){
     Container(webApp, "Web Applicatie", "? (React)", "Helpt reizigers bij het plannen en boeken van reizen")
     Container(backendService, "Backend", "Springboot Java", "Verwerkt data en beheert bedrijfslogica")
-    Container(dataStore, "Database", "SQL of NOSQL?", "Slaat gebruikersgegevens en geboekte reizen op")
+    Container(dataStore, "Database", "MongoDB NOSQL", "Slaat gebruikersgegevens en geboekte reizen op")
 }
 
-' Gebruikersinteracties
 Rel(reiziger, webApp, "Gebruikt", "HTTPS")
 Rel(reisagent, webApp, "Ondersteunt via", "HTTPS")
 
-' Interne systeemrelaties
 Rel(webApp, backendService, "API requests", "HTTPS")
 Rel(backendService, dataStore, "CRUD operaties", "Database toegang")
 
-' Web App naar informatie APIs
 Rel(webApp, googleMapsApi, "Navigatie", "HTTPS/REST")
 Rel(webApp, weerApi, "Weer info", "HTTPS/REST")
 Rel(webApp, nsApi, "Krijgt Vertrektijden", "HTTPS/REST")
 Rel(webApp, overnachtingApi, "Krijgt Accommodaties", "HTTPS/REST")
 Rel(webApp, vluchtApi, "Krijgt vluchten", "HTTPS/REST")
 
-' Authentication
 Rel(webApp, identityApi, "Authenticatie", "HTTPS")
 Rel(backendService, identityApi, "Autorisatie", "HTTPS")
 
-' Backend naar boekings-APIs
 Rel(backendService, nsApi, "Boekt reizen", "HTTPS/REST")
 Rel(backendService, overnachtingApi, "Boekt verblijf", "HTTPS/REST")
 Rel(backendService, vluchtApi, "Boekt vluchten", "HTTPS/REST")
