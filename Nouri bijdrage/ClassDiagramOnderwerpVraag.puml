@@ -1,5 +1,5 @@
 @startuml
-
+title Class Diagram voor ontwerpvraag pressure cooker
 class TripController {
     +createStay(StayRequest): stayBouwSteen
     +createFlight(FlightRequest): tlightBouwSteen

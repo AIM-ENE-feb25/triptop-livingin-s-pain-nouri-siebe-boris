@@ -76,16 +76,16 @@ class Data  {
 
 }
 
-interface Adapter {
-    +boek(data: Data) : void
-    +annuleer(data: Data) : void
-    +wijzig(data: Data) : void
+interface VerblijfAdapter {
+    +boekVerblijf(data: Data) : Data
 }
 
-class BoekingsAdapter implements Adapter {
-    +boek(data: Data) : void
-    +annuleer(data: Data) : void
-    +wijzig(data: Data) : void
+class BookingcomAdapter implements VerblijfAdapter {
+    +boekVerblijf(data: Data) : Data
+}
+
+class AirbnbAdapter implements VerblijfAdapter {
+    +boekVerblijf(data: Data) : Data
 }
 
 class TripRequest {
@@ -100,7 +100,7 @@ TripService "1" -- "1" TripRepository
 TripController "1" -- "*" TripRequest
 
 TripService "1" -- "*" Trip
-TripService "1" -- "*" Adapter
+TripService "1" -- "*" VerblijfAdapter
 
 BouwSteen "1" -- "1" Data
 BouwSteen "1" -- "1" Status
