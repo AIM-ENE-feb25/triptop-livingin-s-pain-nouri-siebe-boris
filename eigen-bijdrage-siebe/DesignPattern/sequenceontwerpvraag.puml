@@ -1,0 +1,25 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml
+title Booking Process - TripTop
+
+actor reiziger
+
+
+    Container(webApp, "Webapplicatie", "React.js", "Gebruikersinterface voor het plannen en beheren van reizen")
+
+    Container_Boundary(cb, "Backend")
+        Component(tripcontroller, "TripController", "Spring Boot Controller", "Ontvangt HTTP-verzoeken en verwerkt reisboekingen")
+        Component(tripservice, "TripService", "Spring Boot Service", "Regelt de volledige afhandeling van boekingen en betalingen")
+        Component(bookingcomadapter, "BookingcomAdapter", "", "Slaat boekingsgegevens op in de database")
+
+Boundary_End()
+
+ComponentDb(db, "Database", "Slaat reis- en betalingsgegevens op")
+
+reiziger -> webApp: Boekt een trip
+webApp -> tripcontroller: Stuurt TripRequest
+tripcontroller -> tripservice: haalt trip op
+tripservice -> bookingcomadapter: haalt nieuwste gegevens op en boekt de accomodatie
+
+
+@enduml

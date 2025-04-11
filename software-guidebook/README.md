@@ -172,10 +172,10 @@ Hier onder het class diagram van de applicatie met de vraag uitgewerkt om dynami
 #### 7.4.2 Booking adapter
 
 ## 8. Architectural Decision Records
-1. [ADR-01: Indeling Webapplicaties](/Users/nouri/Documents/GitHub/triptop-livingin-s-pain-nouri-siebe-boris/Nouri bijdrage/ADR-01.md)
-2. [ADR-02: Communicatie Betaling Provider](/Users/nouri/Documents/GitHub/triptop-livingin-s-pain-nouri-siebe-boris/Nouri bijdrage/ADR-02.md)
-3. [ADR-03: Data-structuur voor verschillende providers (Dynamisch vs Statische)](/Users/nouri/Documents/GitHub/triptop-livingin-s-pain-nouri-siebe-boris/Nouri bijdrage/ADR-03.md)
-4. [ADR-04: Factory pattern](./ADR-02.md)
+1. [ADR-01: Indeling Webapplicaties](../Nouri bijdrage/ADR-01.md)
+2. [ADR-02: Communicatie Betaling Provider](../Nouri bijdrage/ADR-02.md)
+3. [ADR-03: Data-structuur voor verschillende providers (Dynamisch vs Statische)](../Nouri bijdrage/ADR-03.md)
+4. [ADR-04: Factory pattern](../eigen-bijdrage-siebe/ADR-02.md)
 5. [ADR-05: Design Patten ADR](../eigen-bijdrage-siebe/DesignPattern/ADR-DesignPattern.md)
 
 ## 9. Deployment, Operation and Support
