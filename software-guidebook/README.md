@@ -172,6 +172,7 @@ Op code niveau:
 2. [ADR-02: Communicatie Betaling Provider](./ADR-02.md)
 3. [ADR-03: Data-structuur voor verschillende providers (Dynamisch vs Statische)](./ADR-03.md)
 4. [ADR-04: Factory pattern](./ADR-02.md)
+5. [ADR-05: Design Patten ADR](../eigen-bijdrage-siebe/DesignPattern/ADR-DesignPattern.md)
 
 ## 9. Deployment, Operation and Support
 
