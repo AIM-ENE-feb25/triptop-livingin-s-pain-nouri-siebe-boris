@@ -171,6 +171,21 @@ Hier onder het class diagram van de applicatie met de vraag uitgewerkt om dynami
 
 #### 7.4.2 Booking adapter
 
+Een volgende ontwerpvraag was: "Hoe kunnen gemakkelijk verschillende boekingsservices worden geïntegreerd in de applicatie?." Bij deze ontwerpvraag is gekozen om te gaan voor het 'Adapter' pattern. Deze pattern maakt het mogelijk om door middel van één interface met meerdere verschillende API's te communiceren. De individuele adapters van de verschillende boekingsservices worden dan vervolgens op hun eigen manier uitgewerkt. Hierdoor wordt de applicatie makkelijk uitbreidbaar en goed te onderhouden.
+
+![Component Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ComponentDiagramSiebe.png)
+
+Hieronder is het class diagram te zien waarbij te zien is hoe het adapterpattern is geïntegreerd in onze applicatie om deze zo goed onderhoudbaar en uitbreidbaar te maken.
+![Class Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/ClassdiagramPostProtoSiebe.png)
+
+**Sequence diagram:**
+
+![Sequence Diagram](../eigen-bijdrage-siebe/DesignPattern/sequenceontwerpvraagsiebe.png)
+
+**Op code niveau:**
+
+![Sequence Diagram](../opdracht-diagrammen/Groeps-diagram/Png's/protosequencesiebe.png)
+
 ## 8. Architectural Decision Records
 1. [ADR-01: Indeling Webapplicaties](../Nouri bijdrage/ADR-01.md)
 2. [ADR-02: Communicatie Betaling Provider](../Nouri bijdrage/ADR-02.md)

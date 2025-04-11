@@ -15,23 +15,23 @@ LAYOUT_TOP_DOWN()
 Container(frontend, "Web Applicatie", "React js")
 
 Container_Boundary(cb, "Backend") {
-    Component(tripcontroller, "tripController", "Spring Boot controller")
-    Component(tripservice, "tripService", "Spring Boot service")
-    Component(stayadapter, "stayAdapter", "Spring Boot adapter")
-    Component(triprepository, "tripRepository", "Spring Boot repository")
+    Component(tripcontroller, "TripController", "Spring Boot controller")
+    Component(tripservice, "TripService", "Spring Boot service")
+    Component(stayadapter, "VerblijfAdapter", "Spring Boot adapter")
+    Component(triprepository, "TripRepository", "Spring Boot repository")
 }
 
 together{
     System_Ext(stay, "Overnachting API (Booking.com, Airbnb)", "Bied overnachtingen")
-    ComponentDb(db, "Database")
+    ComponentDb(db, "Database", "MongoDB")
 }
 
-    Rel(frontend, tripcontroller, "Uses")
-    Rel(tripcontroller, tripservice, "Uses")
-    Rel(tripservice, stayadapter, "Uses")
-    Rel(stayadapter, stay, "Uses")
+    Rel(frontend, tripcontroller, "Gebruikt")
+    Rel(tripcontroller, tripservice, "Gebruikt")
+    Rel(tripservice, stayadapter, "Gebruikt")
+    Rel(stayadapter, stay, "Gebruikt")
 
-    Rel(tripservice, triprepository, "Uses")
-    Rel(triprepository, db, "Uses")
+    Rel(tripservice, triprepository, "Gebruikt")
+    Rel(triprepository, db, "Gebruikt")
 
 @enduml
