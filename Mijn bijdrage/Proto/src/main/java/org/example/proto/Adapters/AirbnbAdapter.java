@@ -12,7 +12,7 @@ public class AirbnbAdapter implements VerblijfAdapter {
 
     @Override
     public Data updateVerblijf(Data data) {
-        String id = data.haalJsonNodeOp().findValue("hotelid").asText();
+        String id = data.haalJsonNodeOp().findValue("id").asText();
         System.out.println(id);
         System.out.println(data.haalJsonNodeOp().toString());
         String checkinDate = data.haalJsonNodeOp().findValue("checkin").asText();
@@ -52,7 +52,7 @@ public class AirbnbAdapter implements VerblijfAdapter {
                     // Haal de 'total' prijs uit de JSON en print deze
                     if (priceNode.has("total")) {
                         double totalPrice = priceNode.get("total").asDouble();
-                        System.out.println("Total price: $" + totalPrice);
+                        System.out.println("Total price: " + totalPrice);
                     } else {
                         System.out.println("Total price niet gevonden in de response.");
                     }

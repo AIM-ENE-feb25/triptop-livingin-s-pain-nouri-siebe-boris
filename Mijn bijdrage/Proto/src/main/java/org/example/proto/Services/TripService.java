@@ -106,7 +106,7 @@ public class TripService {
                 "        \"data\": [\n" +
                 "          {\n" +
                 "            \"hotel\": \"Cozy Loft\",\n" +
-                "            \"hotelid\": 688944472215518175,\n" +
+                "            \"id\": 688944472215518175,\n" +
                 "            \"adres\": \"789 Grachtenstraat, Utrecht\",\n" +
                 "            \"aantalNachten\": 4, \n" +
                 "            \"checkin\": \"2025-04-14\",\n" +
